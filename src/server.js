@@ -42,7 +42,7 @@ function handleError(res, reason, message, code) {
  */
 
 app.get("/api/Movies", function(req, res) {
-  db.collection(MOVIE_COLLECTION).find().toArray(function(err, docs) {
+  db.collection(MOVIE_COLLECTION).find({},{"Rating":1,"Title":1,"Genre":1, _id:0}).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get movies.");
     } else {
