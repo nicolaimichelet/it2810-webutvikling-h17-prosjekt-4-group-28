@@ -1,24 +1,38 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
+import {NgModule, OnInit} from '@angular/core';
+import { PostsService } from './movies.service';
 import { AppComponent } from './app.component';
-import { SearchComponent } from './search/search.component';
 import { FilterComponent } from './filter/filter.component';
-import { ListComponent } from './list/list.component';
-import { ListItemComponent } from './list-item/list-item.component';
+import {HttpModule} from '@angular/http';
+import { PostsComponent } from './movies/movies.component';
+import {FormsModule} from "@angular/forms";
+import {RouterModule} from "@angular/router";
+
+const ROUTES = [
+  {
+    path: '',
+    redirectTo: 'movies',
+    pathMatch: 'full'
+  },
+  {
+    path: 'movies',
+    component: PostsComponent
+  }
+];
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent,
-    FilterComponent,
-    ListComponent,
-    ListItemComponent
+    PostsComponent // Posts Component injected here
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    RouterModule.forRoot(ROUTES)
   ],
-  providers: [],
+  providers: [PostsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

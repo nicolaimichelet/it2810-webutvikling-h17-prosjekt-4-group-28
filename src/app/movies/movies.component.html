@@ -1,0 +1,10 @@
+<div class="container">
+  <ul class="row" *ngFor="let movie of movies" ng-click="expand = !expand">
+      <li>{{ movie.Title }}</li>
+      <li ng-show="expand">
+        <ul>
+          <li>{{movie.Rating}}</li>
+        </ul>
+      </li>
+  </ul>
+</div>
