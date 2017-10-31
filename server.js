@@ -25,6 +25,9 @@ mongoose.connection.on('Error', (err) => {
 // API file for interacting with MongoDB
 const api = require('./server/routes/api');
 
+//CORS middleware
+app.use(cors({origin: '*'}));
+
 
 // Parsers
 app.use(bodyParser.urlencoded({ extended: false}));
@@ -56,8 +59,6 @@ app.get('/', (req,res) => {
   res.send('Invalid Endpoint');
 });
 
-//CORS middleware
-app.use(cors());
 
 //Set Port
 const port = process.env.PORT || '3000';
