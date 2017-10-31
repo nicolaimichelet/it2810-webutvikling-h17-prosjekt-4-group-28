@@ -14,8 +14,10 @@ function handleError(res, reason, message, code) {
 
 //get all movies, and sort based on values given
 router.get("/Movies", function(req, res) {
-  var query = req.query
-  var sort ={}
+  let query = req.query;
+  console.log(query.sort);
+  let sort ={};
+  let find= {};
   if(query.sort){
     if(query.order){
       if(query.order === "DESC"){
@@ -28,9 +30,12 @@ router.get("/Movies", function(req, res) {
         sort[query.sort] = -1
       }
     }
-
+  }//{Title: 1, Rating: 1, Rank: 1}
+  if(query.gt){
+    find["Rating"] ={$gt : query.gt}
   }
-  db.collection(MOVIE_COLLECTION).find().sort(sort).toArray(function(err, docs) {
+  console.log(find)
+  db.collection(MOVIE_COLLECTION).find({}).sort(sort).start(x).limit(y).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get movies.");
     } else {
@@ -40,10 +45,15 @@ router.get("/Movies", function(req, res) {
 });
 
 
-//todo: fikse søke query
-router.get("/Movies/search", function(req, res) {
-  console.log(req.query)
-  db.collection(MOVIE_COLLECTION).find().toArray(function(err, docs) {
+// Få kun en sjanger med ?Genre=XXX
+router.get("/Movies/genre", function(req, res) {
+  var query = req.query
+  var find = ""
+  if (query.Genre){
+    find= {Genre : {$regex : ".*"+query.Genre+".*"}}
+  }
+  console.log(find)
+  db.collection(MOVIE_COLLECTION).find(find).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get movies.");
     } else {
@@ -52,7 +62,7 @@ router.get("/Movies/search", function(req, res) {
   });
 });
 
-// get specific movie
+// get specific movie by Rank
 router.get("/Movies/:id", function(req, res) {
   console.log("id ble vlagt")
   db.collection(MOVIE_COLLECTION).findOne({Rank: parseInt(req.params.id)}, function (err, doc) {

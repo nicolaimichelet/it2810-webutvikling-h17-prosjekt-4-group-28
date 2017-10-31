@@ -1,4 +1,6 @@
 <div class="container">
+
+  <input ng-model="search" placeholder="Search Name.."/>
   <ul class="row" *ngFor="let movie of movies" ng-click="expand = !expand">
       <li>{{ movie.Title }}</li>
       <li ng-show="expand">
@@ -8,3 +10,6 @@
       </li>
   </ul>
 </div>
+
+
+

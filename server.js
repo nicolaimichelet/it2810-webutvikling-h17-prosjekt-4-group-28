@@ -6,7 +6,7 @@ const http = require('http');
 const app = express();
 
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost:27017/movieDB', { useMongoClient: true });
+mongoose.connect('mongodb://localhost:27017/MovieDB', { useMongoClient: true });
 const db = mongoose.connection;
 module.exports = {db};
 
@@ -18,24 +18,21 @@ db.once('open', () => {
   console.log('Server connected successfully to DB!');
 });
 
-// Catch all other routes and return the index file
+const api = require('./api');
+
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.use('/api', api);
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
-// Point static path to dist
-app.use(express.static(path.join(__dirname, 'dist')));
-
-// Get our API routes
-const api = require('./api');
-
-// Set our api routes
-app.use('/api', api);
-
-app.set('port', '8084');
+const port = process.env.PORT || '8084';
+app.set('port', port);
 
 // Create HTTP server.
 const server = http.createServer(app);
 
 //Listen on provided port, on all network interfaces.
-server.listen('8084', () => console.log(`API running on localhost: 8084`));
+server.listen(port, () => console.log(`API running on localhost:${port}`));
