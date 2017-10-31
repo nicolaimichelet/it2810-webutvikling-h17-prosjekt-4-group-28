@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../movies.service';
 import { MatDialog } from "@angular/material";
@@ -23,3 +24,5 @@ export class PostsComponent implements OnInit {
   }
 
 }
+
+

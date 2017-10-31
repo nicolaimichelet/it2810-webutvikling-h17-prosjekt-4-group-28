@@ -7,6 +7,8 @@ import {HttpModule} from '@angular/http';
 import { PostsComponent } from './movies/movies.component';
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
+import {DataTableDemo1} from './demo1/data-table-demo1';
+import {DataTableModule } from 'angular-4-data-table-bootstrap-4';
 
 const ROUTES = [
   {
@@ -24,13 +26,15 @@ const ROUTES = [
 @NgModule({
   declarations: [
     AppComponent,
-    PostsComponent // Posts Component injected here
+    PostsComponent, // Posts Component injected here
+    DataTableDemo1
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    DataTableModule
   ],
   providers: [PostsService],
   bootstrap: [AppComponent]

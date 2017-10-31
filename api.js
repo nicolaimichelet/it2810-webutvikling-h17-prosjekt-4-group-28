@@ -35,7 +35,7 @@ router.get("/Movies", function(req, res) {
     find["Rating"] ={$gt : query.gt}
   }
   console.log(find)
-  db.collection(MOVIE_COLLECTION).find({}).sort(sort).start(x).limit(y).toArray(function(err, docs) {
+  db.collection(MOVIE_COLLECTION).find({}).sort(sort).limit(20).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get movies.");
     } else {

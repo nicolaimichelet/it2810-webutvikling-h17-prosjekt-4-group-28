@@ -6,7 +6,7 @@ const http = require('http');
 const app = express();
 
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost:27017/MovieDB', { useMongoClient: true });
+mongoose.connect('mongodb://localhost:27017/movieDB', { useMongoClient: true });
 const db = mongoose.connection;
 module.exports = {db};
 
