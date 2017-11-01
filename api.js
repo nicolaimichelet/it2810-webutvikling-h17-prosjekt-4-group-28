@@ -15,27 +15,36 @@ function handleError(res, reason, message, code) {
 //get all movies, and sort based on values given
 router.get("/Movies", function(req, res) {
   let query = req.query;
-  console.log(query.sort);
-  let sort ={};
-  let find= {};
-  if(query.sort){
-    if(query.order){
-      if(query.order === "DESC"){
-        sort[query.sort] = -1
+  /*  console.log(query.sort);
+    let sort ={};
+    let find= {};
+    if(query.sort){
+      if(query.order){
+        if(query.order === "DESC"){
+          sort[query.sort] = -1
+        }
+        else if(query.order === "ASC"){
+          sort[query.sort] = 1
+        }
+        else{
+          sort[query.sort] = -1
+        }
       }
-      else if(query.order === "ASC"){
-        sort[query.sort] = 1
-      }
-      else{
-        sort[query.sort] = -1
-      }
+    }//{Title: 1, Rating: 1, Rank: 1}
+    if(query.gt){
+      find["Rating"] ={$gt : query.gt}
     }
-  }//{Title: 1, Rating: 1, Rank: 1}
-  if(query.gt){
-    find["Rating"] ={$gt : query.gt}
+    console.log(find)*/
+  const page = req.query.page * 10;
+  let limit2 = 50;
+  console.log("limit" + query.limit)
+  if (query.limit !== undefined){
+    limit2 = parseInt(query.limit);
+  }else{
+    limit2 = parseInt(50)
   }
-  console.log(find)
-  db.collection(MOVIE_COLLECTION).find({}).sort(sort).limit(20).toArray(function(err, docs) {
+
+  db.collection(MOVIE_COLLECTION).find({}).limit(limit2).skip(page).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get movies.");
     } else {

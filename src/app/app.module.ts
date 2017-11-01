@@ -1,14 +1,48 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {NgModule, OnInit} from '@angular/core';
-import { PostsService } from './movies.service';
+import { MovieDb } from './movies.service';
 import { AppComponent } from './app.component';
-import { FilterComponent } from './filter/filter.component';
 import {HttpModule} from '@angular/http';
-import { PostsComponent } from './movies/movies.component';
+import {MoviesComponent} from './movies/movies.component';
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
-import {DataTableDemo1} from './demo1/data-table-demo1';
-import {DataTableModule } from 'angular-4-data-table-bootstrap-4';
+import {HttpClientModule} from "@angular/common/http";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatStepperModule,
+} from '@angular/material';
+import {CdkTableModule} from '@angular/cdk/table';
+
 
 const ROUTES = [
   {
@@ -18,7 +52,7 @@ const ROUTES = [
   },
   {
     path: 'movies',
-    component: PostsComponent
+    component: MoviesComponent
   }
 ];
 
@@ -26,17 +60,52 @@ const ROUTES = [
 @NgModule({
   declarations: [
     AppComponent,
-    PostsComponent, // Posts Component injected here
-    DataTableDemo1
+    MoviesComponent, // Posts Component injected here
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES),
-    DataTableModule
+    HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    CdkTableModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [PostsService],
+  providers: [MovieDb],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

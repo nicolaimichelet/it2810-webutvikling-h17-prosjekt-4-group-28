@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { PostsService } from './movies.service';
+import { MovieDb } from './movies.service';
 
-describe('PostsService', () => {
+describe('MovieDb', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PostsService]
+      providers: [MovieDb]
     });
   });
 
-  it('should be created', inject([PostsService], (service: PostsService) => {
+  it('should be created', inject([MovieDb], (service: MovieDb) => {
     expect(service).toBeTruthy();
   }));
 });
