@@ -64,7 +64,7 @@ export class ExampleDataSource extends DataSource<any> {
       return data;
     }
     return data.filter((item: MovieData) => {
-      const searchStr = (item.Title.toLowerCase());
+      const searchStr = (item.Title.toString().toLowerCase());
       return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
     });
   }

@@ -18,7 +18,7 @@ export class AuthService {
     //we need to specify headers with content type and declare json
     headers.append('Content-Type', 'application/json');
     //specify where we want to insert and actually map it into json
-    return this.http.post('http://localhost:3000/api/register', user, {headers: headers})
+    return this.http.post('http://localhost:8084/api/register', user, {headers: headers})
       .map(res => res.json());
   }
 
