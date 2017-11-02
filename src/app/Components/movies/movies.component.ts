@@ -10,7 +10,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {isObject} from "util";
-import { MovieDb,  } from '../movies.service';
+import { MovieDb,  } from '../../movies.service';
 
 
 @Component({
