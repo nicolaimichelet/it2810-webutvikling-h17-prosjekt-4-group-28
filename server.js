@@ -9,11 +9,14 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config/database')
 
+//This is our server file. Above are the required imports
+
 //Connect to database
 mongoose.Promise = require('bluebird');
 mongoose.connect(config.database);
 const db = mongoose.connection;
 module.exports = {db};
+
 
 //On connection
 db.once('Connected', () => {
@@ -28,18 +31,18 @@ db.on('Error', (err) => {
 // API file for interacting with MongoDB
 const api = require('./server/routes/api');
 
+//CORS middleware
+app.use(cors({origin: '*'}));
 
 // Parsers
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 
 //Passport Middleware
-
 app.use(passport.initialize());
 app.use(passport.session());
 
 require('./config/passport')(passport);
-
 
 //Angular DIST output folder
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -59,8 +62,6 @@ app.get('/', (req,res) => {
   res.send('Invalid Endpoint');
 });
 
-//CORS middleware
-app.use(cors());
 
 //Set Port
 const port = process.env.PORT || '8084';

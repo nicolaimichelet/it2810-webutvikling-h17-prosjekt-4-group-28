@@ -1,20 +1,17 @@
 
+<!-- Basic html form, uses onRegisterSubmit, and link fields to values-->
 <form (submit)="onRegisterSubmit()">
   <div class="form-group">
     <label>Name</label>
-    <input type="text" ng-model="name" name="name" class="form-control">
+    <input type="text" [(ngModel)]="name" name="name" class="form-control">
   </div>
   <div class="form-group">
     <label>Username</label>
-    <input type="text" ng-model="username" name="username" class="form-control">
-  </div>
-  <div class="form-group">
-    <label>Email</label>
-    <input type="text" ng-model="email" name="email" class="form-control">
+    <input type="text" [(ngModel)]="username" name="username" class="form-control">
   </div>
   <div class="form-group">
     <label>Password</label>
-    <input type="password" ng-model="password" name="password " class="form-control">
+    <input type="password" [(ngModel)]="password" name="password" class="form-control">
   </div>
   <input type="submit" class="btn btn-info" value="submit">
 </form>

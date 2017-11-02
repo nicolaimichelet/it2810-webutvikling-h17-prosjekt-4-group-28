@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FlashMessagesModule } from 'angular2-flash-messages/module';
 import {NgModule, OnInit} from '@angular/core';
 import { MovieDb } from './movies.service';
 import { AppComponent } from './app.component';
@@ -46,6 +47,10 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 import {RouterModule, Routes} from "@angular/router";
 import { ProfileComponent } from './Components/profile/profile.component';
 
+import {ValidateService} from './services/validate.service';
+import {AuthService} from './services/auth.service';
+
+//Declare our routing on webpage
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
@@ -60,10 +65,11 @@ const appRoutes: Routes = [
     ProfileComponent,
     MoviesComponent, // Posts Component injected here
   ],
+  //Must define our imports, use flash module, http, etc.
   imports: [
-    BrowserModule,
     FormsModule,
     HttpModule,
+    FlashMessagesModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     BrowserModule,
@@ -103,7 +109,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule
   ],
-  providers: [MovieDb],
+  providers: [MovieDb,ValidateService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
