@@ -46,6 +46,7 @@ import { RegisterComponent } from './Components/register/register.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import {RouterModule, Routes} from "@angular/router";
 import { ProfileComponent } from './Components/profile/profile.component';
+import { LoginComponent } from './login/login.component';
 
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
@@ -54,12 +55,16 @@ import {AuthService} from './services/auth.service';
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'home', component: MoviesComponent}
+  {path: 'home', component: MoviesComponent},
+  {path:'login',component:LoginComponent}
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
+
+    LoginComponent
+
     RegisterComponent,
     NavbarComponent,
     ProfileComponent,
@@ -107,7 +112,8 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatTooltipModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgModule
   ],
   providers: [MovieDb,ValidateService, AuthService],
   bootstrap: [AppComponent]
