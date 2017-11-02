@@ -42,12 +42,11 @@ import {
   MatStepperModule,
 } from '@angular/material';
 import {CdkTableModule} from '@angular/cdk/table';
-import { RegisterComponent } from './Components/register/register.component';
-import { NavbarComponent } from './Components/navbar/navbar.component';
 import {RouterModule, Routes} from "@angular/router";
 import { ProfileComponent } from './Components/profile/profile.component';
 import { LoginComponent } from './Components/login/login.component';
-
+import { RegisterComponent } from './Components/register/register.component';
+import { NavbarComponent } from './Components/navbar/navbar.component';
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
 
@@ -56,8 +55,8 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'home', component: MoviesComponent},
-  {path:'login',component:LoginComponent}
-]
+  {path:'login', component: LoginComponent}
+];
 
 @NgModule({
   declarations: [
@@ -111,7 +110,6 @@ const appRoutes: Routes = [
     MatTooltipModule,
     HttpClientModule,
     FormsModule,
-    NgModule
   ],
   providers: [MovieDb,ValidateService, AuthService],
   bootstrap: [AppComponent]

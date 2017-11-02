@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
       name: this.name,
       username: this.username,
       password: this.password
-    }
+    };
 
     //Required fields - displays flash msg if one or more fields are missing input
     if(!this.validateService.validateRegister(user)){
