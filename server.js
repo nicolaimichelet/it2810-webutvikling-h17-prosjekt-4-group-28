@@ -1,3 +1,4 @@
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -11,15 +12,19 @@ const config = require('./config/database')
 //This is our server file. Above are the required imports
 
 //Connect to database
+mongoose.Promise = require('bluebird');
 mongoose.connect(config.database);
+const db = mongoose.connection;
+module.exports = {db};
+
 
 //On connection
-mongoose.connection.on('Connected', () => {
+db.once('Connected', () => {
   console.log('Connected to database ' + config.database );
 });
 
 //On Error
-mongoose.connection.on('Error', (err) => {
+db.on('Error', (err) => {
   console.log('Database error ' + err );
 });
 
@@ -59,10 +64,11 @@ app.get('/', (req,res) => {
 
 
 //Set Port
-const port = process.env.PORT || '3000';
+const port = process.env.PORT || '8084';
 app.set('port', port);
 
 const server = http.createServer(app);
 
 //Start server
 server.listen(port, () => console.log(`Running on localhost:${port}`));
+
