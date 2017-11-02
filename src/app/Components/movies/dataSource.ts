@@ -25,6 +25,10 @@ export class ExampleDataSource extends DataSource<any> {
   _filterChange = new BehaviorSubject('');
   get filter(): string { return this._filterChange.value; }
   set filter(filter: string) { this._filterChange.next(filter); }
+  _togglChange = new BehaviorSubject('');
+  get toggl(): string {return this._togglChange.value; }
+  set toggl(toggl: string) { this._togglChange.next(toggl);}
+
   length: number;
   connect(): Observable<MovieData[]> {
     console.log("connect");
@@ -32,11 +36,16 @@ export class ExampleDataSource extends DataSource<any> {
       this._MoviesComponent.dataChange,
       this._paginator.page,
       this._filterChange,
-      this._sort.sortChange
+      this._sort.sortChange,
+      this._togglChange
 
     ];
 
     this._filterChange
+      .takeUntil(this.disconnect$)
+      .subscribe(() => this.resetPaginator());
+
+    this._togglChange
       .takeUntil(this.disconnect$)
       .subscribe(() => this.resetPaginator());
 
@@ -46,6 +55,7 @@ export class ExampleDataSource extends DataSource<any> {
       .takeUntil(this.disconnect$)
       .map(() => this.getFreshData())
       .map((data) => this.getFilteredData(data))
+      .map((data) => this.getToggledData(data))
       .map(data => this.getSortedData(data))
       .do(data => this.setLength(data))
       .map(data => this.paginate(data));
@@ -66,6 +76,15 @@ export class ExampleDataSource extends DataSource<any> {
     return data.filter((item: MovieData) => {
       const searchStr = (item.Title.toString().toLowerCase());
       return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
+    });
+  }
+  getToggledData(data) {
+    if (this.toggl === '') {
+      return data;
+    }
+    return data.filter((item: MovieData) => {
+      const searchStr = (item.Genre.toString().toLocaleLowerCase());
+      return searchStr.indexOf(this.toggl.toLowerCase()) !== -1;
     });
   }
 
