@@ -1,18 +1,11 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    {{title}}
-  </h1>
-  <img width="300" src="../pineapple.png">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="/login">Logga</a></h2>
-  </li>
 
-</ul>
+
+<!--Our main app html, navbar, and holders for flash, and routing-->
+<app-navbar></app-navbar>
 <div class="container">
+  <flash-messages></flash-messages>
   <router-outlet></router-outlet>
   <app-login></app-login>
 </div>
+
+
