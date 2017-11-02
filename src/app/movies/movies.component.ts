@@ -34,8 +34,7 @@ export class MoviesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private http: HttpClient, private movieDb: MovieDb) {
-    console.log("construct appcomp");
-
+    console.log("constr");
   }
 
 
@@ -55,7 +54,7 @@ export class MoviesComponent implements OnInit {
 
   generateList() {
     const params = new HttpParams()
-      .set('limit', '200').set('page', '0');
+      .set('limit', '100').set('page', '0');
     this.http.get('/api/Movies', {params}).subscribe(data => {
       /** Read the result field from the JSON response. */
       if (isObject(data)) {
@@ -69,7 +68,6 @@ export class MoviesComponent implements OnInit {
 
 
   get data(): MovieData[] {
-    console.log("get data");
     return this.dataChange.value;
   }
 
@@ -80,18 +78,14 @@ export class MoviesComponent implements OnInit {
 
   /** Adds a new movie to the database. */
   addMovie(i, movieList) {
-    console.log("Addmovie");
 
     const copiedData = this.data.slice();
-    console.log(copiedData)
-
     copiedData.push(this.createNewMovie(i, movieList));
     this.dataChange.next(copiedData);
   }
 
   /** Builds and returns a new movie. */
   private createNewMovie(i, movieList) {
-    console.log("createNewMovie");
 
     const Description = movieList[i].Description;
     const actors = movieList[i].actors;

@@ -60,13 +60,11 @@ export class ExampleDataSource extends DataSource<any> {
   }
 
   getFilteredData(data) {
-    console.log(this.filter)
     if (this.filter === '') {
       return data;
     }
     return data.filter((item: MovieData) => {
       const searchStr = (item.Title.toLowerCase());
-      console.log(searchStr);
       return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
     });
   }
