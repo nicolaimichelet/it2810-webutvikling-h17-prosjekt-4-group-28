@@ -1,38 +1,71 @@
-const mongoose = require('mongoose');
+
 const express = require('express');
+const bodyParser = require('body-parser');
 const path = require('path');
 const http = require('http');
-
+const passport = require('passport');
 const app = express();
+const cors = require('cors');
+const mongoose = require('mongoose');
+const config = require('./config/database')
 
-mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost:27017/MovieDB', { useMongoClient: true });
-const db = mongoose.connection;
-module.exports = {db};
+//Connect to database
+mongoose.connect(config.database);
 
-//Check if connected to database
-db.on('error', err => {
-  console.log('Error while connecting to DB: ${err.message}') ;
+
+//On connection
+mongoose.connection.on('Connected', () => {
+  console.log('Connected to database ' + config.database );
 });
-db.once('open', () => {
-  console.log('Server connected successfully to DB!');
+
+//On Error
+mongoose.connection.on('Error', (err) => {
+  console.log('Database error ' + err );
 });
 
-const api = require('./api');
+// API file for interacting with MongoDB
+const api = require('./server/routes/api');
 
+
+// Parsers
+app.use(bodyParser.urlencoded({ extended: false}));
+app.use(bodyParser.json());
+
+//Passport Middleware
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
+
+
+//Angular DIST output folder
 app.use(express.static(path.join(__dirname, 'dist')));
 
+
+// API location
 app.use('/api', api);
 
+
+// Send all other requests to the Angular app
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
+//Set Index route
+app.get('/', (req,res) => {
+  res.send('Invalid Endpoint');
+});
+
+//CORS middleware
+app.use(cors());
+
+//Set Port
 const port = process.env.PORT || '8084';
 app.set('port', port);
 
-// Create HTTP server.
 const server = http.createServer(app);
 
-//Listen on provided port, on all network interfaces.
-server.listen(port, () => console.log(`API running on localhost:${port}`));
+//Start server
+server.listen(port, () => console.log(`Running on localhost:${port}`));
+

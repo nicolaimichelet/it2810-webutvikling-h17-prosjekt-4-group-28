@@ -27,12 +27,22 @@
     "angular-4-data-table": "^0.2.3",
     "angular-4-data-table-bootstrap-4": "^0.2.0",
     "bootstrap": "^4.0.0-beta.2",
-    "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
+    "body-parser": "^1.18.2",
+    "core-js": "^2.4.1",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
     "mongodb": "^2.2.33",
-    "mongoose": "^4.12.6",
-    "rxjs": "^5.5.2",
-    "zone.js": "^0.8.14"
+    "mongoose": "^4.12.5",
+    "bcryptjs": "*",
+    "jsonwebtoken": "*",
+    "passport": "*",
+    "passport-jwt": "*",
+    "angular": "^1.6.6",
+    "coverflow": "^1.3.0",
+    "rxjs": "^5.4.2",
+    "zone.js": "^0.8.5"
+
   },
   "devDependencies": {
     "@angular/cli": "1.4.9",
