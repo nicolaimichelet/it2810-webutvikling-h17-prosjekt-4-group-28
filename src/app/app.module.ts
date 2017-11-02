@@ -3,9 +3,8 @@ import {NgModule, OnInit} from '@angular/core';
 import { MovieDb } from './movies.service';
 import { AppComponent } from './app.component';
 import {HttpModule} from '@angular/http';
-import {MoviesComponent} from './movies/movies.component';
-import {FormsModule} from "@angular/forms";
-import {RouterModule} from "@angular/router";
+import {MoviesComponent} from './Components/movies/movies.component';
+import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {
@@ -46,19 +45,16 @@ import { RegisterComponent } from './Components/register/register.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import {RouterModule, Routes} from "@angular/router";
 import { ProfileComponent } from './Components/profile/profile.component';
-import { HomeComponent } from './Components/home/home.component';
 
 const appRoutes: Routes = [
-  {path:'register', component: RegisterComponent},
-  {path: 'home', component: HomeComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'movies', component: MoviesComponent}
+  {path: 'home', component: MoviesComponent}
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     RegisterComponent,
     NavbarComponent,
     ProfileComponent,
@@ -105,11 +101,7 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatTooltipModule,
     HttpClientModule,
-    FormsModule,
-    RegisterComponent,
-    NavbarComponent,
-    ProfileComponent,
-    HomeComponent
+    FormsModule
   ],
   providers: [MovieDb],
   bootstrap: [AppComponent]

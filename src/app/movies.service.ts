@@ -3,8 +3,8 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {HttpClient} from '@angular/common/http';
 import {isObject} from "util";
-import {MovieData} from "./movies/movies.component";
-import {Movie} from "./movies/movie";
+import {MovieData} from "./Components/movies/movies.component";
+import {Movie} from "./Components/movies/movie";
 
 @Injectable()
 export class MovieDb  implements OnInit{

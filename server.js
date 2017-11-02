@@ -10,16 +10,18 @@ const mongoose = require('mongoose');
 const config = require('./config/database')
 
 //Connect to database
+mongoose.Promise = require('bluebird');
 mongoose.connect(config.database);
-
+const db = mongoose.connection;
+module.exports = {db};
 
 //On connection
-mongoose.connection.on('Connected', () => {
+db.once('Connected', () => {
   console.log('Connected to database ' + config.database );
 });
 
 //On Error
-mongoose.connection.on('Error', (err) => {
+db.on('Error', (err) => {
   console.log('Database error ' + err );
 });
 
