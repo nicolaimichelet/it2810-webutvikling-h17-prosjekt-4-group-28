@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   username: String;
   password: String;
 
-
+  //Taken in necessary services like flash, router and auth
   constructor(
     private validateService: ValidateService,
     private flashMessage: FlashMessagesService,
@@ -28,6 +28,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
+  //This function registers a user on submit button
   onRegisterSubmit(){
     const user = {
       name: this.name,
@@ -35,13 +36,13 @@ export class RegisterComponent implements OnInit {
       password: this.password
     }
 
-    //Required fields
+    //Required fields - displays flash msg if one or more fields are missing input
     if(!this.validateService.validateRegister(user)){
       this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 3000});
       return false;
     }
 
-    //Register user
+    //Register user - actually registers user. Shows flash msg if success or if it didn't work.
     this.authService.registerUser(user).subscribe(data => {
       if (data.success){
         this.flashMessage.show('You are now registered and can log in!', {cssClass: 'alert-success', timeout: 3000});

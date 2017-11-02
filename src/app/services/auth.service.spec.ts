@@ -2,6 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
 
+//Authentication service - file automatically created, when auth files were created
 describe('AuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({

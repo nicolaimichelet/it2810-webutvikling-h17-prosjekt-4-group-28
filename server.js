@@ -8,9 +8,10 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config/database')
 
+//This is our server file. Above are the required imports
+
 //Connect to database
 mongoose.connect(config.database);
-
 
 //On connection
 mongoose.connection.on('Connected', () => {
@@ -28,18 +29,15 @@ const api = require('./server/routes/api');
 //CORS middleware
 app.use(cors({origin: '*'}));
 
-
 // Parsers
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 
 //Passport Middleware
-
 app.use(passport.initialize());
 app.use(passport.session());
 
 require('./config/passport')(passport);
-
 
 //Angular DIST output folder
 app.use(express.static(path.join(__dirname, 'dist')));

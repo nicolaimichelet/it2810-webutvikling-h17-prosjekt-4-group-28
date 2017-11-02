@@ -14,6 +14,7 @@ import { HomeComponent } from './Components/home/home.component';
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
 
+//Declare our routing on webpage
 const appRoutes: Routes = [
   {path:'register', component: RegisterComponent},
   {path: 'home', component: HomeComponent},
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
     ProfileComponent,
     HomeComponent
   ],
+  //Must define our imports, use flash module, http, etc.
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
