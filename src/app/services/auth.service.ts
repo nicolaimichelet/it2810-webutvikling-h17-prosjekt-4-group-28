@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
+import {tokenNotExpired} from "angular2-jwt";
 
 //Important to import http.
 
@@ -22,18 +23,40 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  //Authenticate the user, make a post request.
+  //if succesful, return token and user info
   authenticateUser(user){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:8084/users/authenticate', user,{headers: headers})
+    return this.http.post('http://localhost:8084/api/authenticate', user,{headers: headers})
       .map(res => res.json());
   }
 
+  getProfile(){
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type','application/json');
+    return this.http.get('http://localhost:8084/api/profile', {headers: headers})
+      .map(res => res.json());
+  }
+
+
   storeUserData(token, user){
+    //save in local storage
     localStorage.setItem('id_token', token);
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('user', JSON.stringify(user)); //local storage can only store strings so we stringify
     this.authToken = token;
     this.user = user;
+  }
+
+  loadToken(){
+    const token = localStorage.getItem('id_token');
+    this.authToken = token;
+  }
+  //check token is there
+  loggedIn(){
+    return tokenNotExpired('id_token');
   }
 
   logout(){

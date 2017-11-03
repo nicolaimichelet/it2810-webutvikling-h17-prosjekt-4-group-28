@@ -49,11 +49,12 @@ import { RegisterComponent } from './Components/register/register.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
+import {AuthGuard} from "./guards/auth.guard";
 
 //Declare our routing on webpage
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
-  {path: 'profile', component: ProfileComponent},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'home', component: MoviesComponent},
   {path:'login', component: LoginComponent}
 ];
@@ -111,7 +112,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
   ],
-  providers: [MovieDb,ValidateService, AuthService],
+  providers: [MovieDb,ValidateService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
