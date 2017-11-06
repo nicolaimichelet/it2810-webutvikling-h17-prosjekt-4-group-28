@@ -8,6 +8,8 @@ import {MoviesComponent} from './Components/movies/movies.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import 'hammerjs';
+
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -43,31 +45,33 @@ import {
 
 } from '@angular/material';
 import {CdkTableModule} from '@angular/cdk/table';
-import { RegisterComponent } from './Components/register/register.component';
-import { NavbarComponent } from './Components/navbar/navbar.component';
 import {RouterModule, Routes} from "@angular/router";
 import { ProfileComponent } from './Components/profile/profile.component';
-
+import { LoginComponent } from './Components/login/login.component';
+import { RegisterComponent } from './Components/register/register.component';
+import { NavbarComponent } from './Components/navbar/navbar.component';
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
 import { MovieComponent } from './Components/movie/movie.component';
+import {AuthGuard} from "./guards/auth.guard";
 
 //Declare our routing on webpage
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
-  {path: 'profile', component: ProfileComponent},
-  {path: 'home', component: MoviesComponent}
-]
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'home', component: MoviesComponent},
+  {path:'login', component: LoginComponent}
+];
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     RegisterComponent,
     NavbarComponent,
     ProfileComponent,
     MoviesComponent,
     MovieComponent
-     // Posts Component injected here
   ],
   entryComponents:[
     MovieComponent
@@ -117,7 +121,7 @@ const appRoutes: Routes = [
     FormsModule,
     MatDialogModule
   ],
-  providers: [MovieDb,ValidateService, AuthService],
+  providers: [MovieDb,ValidateService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

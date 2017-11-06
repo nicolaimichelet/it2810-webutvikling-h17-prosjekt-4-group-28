@@ -62,6 +62,10 @@ app.get('/', (req,res) => {
   res.send('Invalid Endpoint');
 });
 
+//Send everything to index
+app.get('*', (req,res) => {
+  res.sendFile(path.join(__dirname, 'src/index.html'));
+});
 
 //Set Port
 const port = process.env.PORT || '8084';
