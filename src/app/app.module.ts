@@ -55,7 +55,7 @@ import {AuthService} from './services/auth.service';
 import { MovieComponent } from './Components/movie/movie.component';
 import {AuthGuard} from "./guards/auth.guard";
 
-//Declare our routing on webpage
+// Declare our routing on webpage
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
@@ -76,7 +76,7 @@ const appRoutes: Routes = [
   entryComponents:[
     MovieComponent
   ],
-  //Must define our imports, use flash module, http, etc.
+  // Must define our imports, use flash module, http, etc.
   imports: [
     FormsModule,
     HttpModule,
