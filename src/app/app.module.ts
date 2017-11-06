@@ -8,6 +8,8 @@ import {MoviesComponent} from './Components/movies/movies.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import 'hammerjs';
+
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -67,6 +69,7 @@ const appRoutes: Routes = [
     NavbarComponent,
     ProfileComponent,
     MoviesComponent, // Posts Component injected here
+
   ],
   //Must define our imports, use flash module, http, etc.
   imports: [
