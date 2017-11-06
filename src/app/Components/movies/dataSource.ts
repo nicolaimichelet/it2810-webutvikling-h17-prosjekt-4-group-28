@@ -28,6 +28,10 @@ export class ExampleDataSource extends DataSource<any> {
   _togglChange = new BehaviorSubject('');
   get toggl(): string {return this._togglChange.value; }
   set toggl(toggl: string) { this._togglChange.next(toggl);}
+  _ratingChange = new BehaviorSubject(0);
+  get rating(): number {return this._ratingChange.value; }
+  set rating(rating: number) { this._ratingChange.next(rating); }
+
 
   length: number;
   connect(): Observable<MovieData[]> {
@@ -37,7 +41,8 @@ export class ExampleDataSource extends DataSource<any> {
       this._paginator.page,
       this._filterChange,
       this._sort.sortChange,
-      this._togglChange
+      this._togglChange,
+      this._ratingChange
 
     ];
 
@@ -49,6 +54,10 @@ export class ExampleDataSource extends DataSource<any> {
       .takeUntil(this.disconnect$)
       .subscribe(() => this.resetPaginator());
 
+    this._ratingChange
+      .takeUntil(this.disconnect$)
+      .subscribe(() => this.resetPaginator());
+
 
     return Observable
       .merge(...displayDataChanges)
@@ -57,6 +66,7 @@ export class ExampleDataSource extends DataSource<any> {
       .map((data) => this.getFilteredData(data))
       .map((data) => this.getToggledData(data))
       .map(data => this.getSortedData(data))
+      .map(data => this.getRatingData(data))
       .do(data => this.setLength(data))
       .map(data => this.paginate(data));
   }
@@ -87,6 +97,13 @@ export class ExampleDataSource extends DataSource<any> {
       return searchStr.indexOf(this.toggl.toLowerCase()) !== -1;
     });
   }
+  getRatingData(data) {
+    return data.sort(function (a, b) {
+      return a - b;
+    }).filter((item: MovieData) => {
+      return item.Rating > this.rating;
+    });
+  }
 
   paginate(data) {
     const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
@@ -114,6 +131,9 @@ export class ExampleDataSource extends DataSource<any> {
           break;
         case 'Genre':
           [propertyA, propertyB] = [a.Genre, b.Genre];
+          break;
+        case 'Rating':
+          [propertyA, propertyB] = [parseFloat(b.Rating), parseFloat(a.Rating)];
           break;
       }
 
