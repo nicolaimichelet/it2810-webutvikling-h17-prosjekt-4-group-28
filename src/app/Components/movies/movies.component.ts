@@ -1,16 +1,14 @@
-
-
-
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import{ExampleDataSource} from "./dataSource";
-import { Movie } from './movie';
-import {MatSort} from "@angular/material";
+import{ExampleDataSource} from './dataSource';
+import {MatSort, MatDialog} from '@angular/material';
 import {MatPaginator} from '@angular/material';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {isObject} from "util";
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {isObject} from 'util';
 import { MovieDb,  } from '../../movies.service';
+import {ArrayLikeObservable} from 'rxjs/observable/ArrayLikeObservable';
+import {MovieComponent} from '../movie/movie.component';
 
 
 @Component({
@@ -23,21 +21,31 @@ import { MovieDb,  } from '../../movies.service';
 
 
 export class MoviesComponent implements OnInit {
-  movies: Movie[];
-  selectedMovie: Movie;
-  dialogResult: "";
+  chosenGenre: any = ''
   displayedColumns = ['_id', 'Title', 'Year', 'Genre'];
   dataSource: ExampleDataSource | null;
-
+  toggle: any = {Action: false, Adventure: false, Animation: false, Drama: false, Romance: false, Fantasy: false, Scifi: false};
   @ViewChild('filter') filter: ElementRef;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  dialogResult = '';
+  dataChange: BehaviorSubject<MovieData[]> = new BehaviorSubject<MovieData[]>([]);
 
-  constructor(private http: HttpClient, private movieDb: MovieDb) {
-    console.log("constr");
+
+  constructor(public dialog: MatDialog, private http: HttpClient, private movieDb: MovieDb) {
+    console.log('constr');
   }
 
+  toggleGenre(name): void {
+    if(name.value === 'Clear'){
+      this.chosenGenre = '';
+    }else{
+      this.chosenGenre = name.value;
+    }
 
+    console.log(this.chosenGenre);
+    this.dataSource.toggl = this.chosenGenre;
+  }
 
   ngOnInit(): void {
     this.generateList()
@@ -49,22 +57,36 @@ export class MoviesComponent implements OnInit {
         if (!this.dataSource) { return; }
         this.dataSource.filter = this.filter.nativeElement.value;
       });
-  }
+    }
 
+  /** Sets the Movie data displyed on in the Pop-up. */
+  openDialog(data) {
+    console.log(data)
+    this.movieDb.specificMovie(data._id).then( movies => {
+      data = {
+        'Title': movies.Title,
+        'Description': movies.Description,
+        'Director': movies.Director,
+        'Genre': movies.Genre,
+        'Year': movies.Year,
+        'Actors': movies.Actors
+      };
+      const dialog = this.dialog.open(MovieComponent, {
+        data,
+      });
 
-  generateList() {
-    const params = new HttpParams()
-      .set('limit', '100').set('page', '0');
-    this.http.get('/api/Movies', {params}).subscribe(data => {
-      /** Read the result field from the JSON response. */
-      if (isObject(data)) {
-        const movieData = ((<MovieData> data));
-        this.createList(movieData);
-      }
+      dialog.afterClosed().subscribe(result => {
+        this.dialogResult = result;
+      });
     });
   }
 
-  dataChange: BehaviorSubject<MovieData[]> = new BehaviorSubject<MovieData[]>([]);
+
+
+  generateList() {
+  this.movieDb.loadDb().then(movies => this.createList(movies));
+  }
+
 
 
   get data(): MovieData[] {
@@ -89,11 +111,12 @@ export class MoviesComponent implements OnInit {
 
     const Description = movieList[i].Description;
     const actors = movieList[i].actors;
-    const director = movieList[i].director;
+    const Director = movieList[i].Director;
     const Genre = movieList[i].Genre;
-    const runtime = movieList[i].runtime;
+    const Runtime = movieList[i].Runtime;
     const Year = movieList[i].Year;
     const Title =  movieList[i].Title;
+    const Rank =  movieList[i].Rank;
 
 
 
@@ -102,11 +125,12 @@ export class MoviesComponent implements OnInit {
       _id: (this.data.length + 1).toString(),
       Description: Description,
       actors: actors,
-      director: director,
+      Director: Director,
       Genre: Genre,
-      runtime: runtime,
+      Runtime: Runtime,
       Year: Year,
-      Title: Title
+      Title: Title,
+      Rank: Rank
 
     };
   }
@@ -115,14 +139,13 @@ export class MoviesComponent implements OnInit {
 
 export interface MovieData {
   _id?: string;
-  readMore?: string;
-  poster?: string;
   Description?: string;
-  actors?: string;
-  director?: string;
-  genre?: string;
-  runtime?: string;
-  year?: number;
+  Actors?: string;
+  Director?: string;
+  Genre?: string;
+  Runtime?: string;
+  Year?: number;
   Title?: string;
+  Rank: number;
 }
 

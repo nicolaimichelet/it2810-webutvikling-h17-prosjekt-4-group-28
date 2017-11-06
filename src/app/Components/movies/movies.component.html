@@ -6,6 +6,16 @@
         <mat-hint><strong></strong>Search</mat-hint>
       </mat-form-field>
   </div>
+  <mat-button-toggle-group name="gruppe" (change)="toggleGenre($event)">
+    <mat-button-toggle value="Action" >Action</mat-button-toggle>
+    <mat-button-toggle value="Adventure">Adventure</mat-button-toggle>
+    <mat-button-toggle value="Animation">Animation</mat-button-toggle>
+    <mat-button-toggle value="Drama">Drama</mat-button-toggle>
+    <mat-button-toggle value="Romance">Romance</mat-button-toggle>
+    <mat-button-toggle value="Fantasy">Fantasy</mat-button-toggle>
+    <mat-button-toggle value="Sci-fi">Sci-fi</mat-button-toggle>
+    <mat-button-toggle value="Clear">Clear</mat-button-toggle>
+  </mat-button-toggle-group>
   <div class="table table-striped table-hover">
     <mat-table #table [dataSource]="dataSource" matSort class="table table-striped table-hover" >
       <!--- Note that these columns can be defined in any order.
@@ -40,7 +50,7 @@
 
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog(row)"></mat-row>
     </mat-table>
     <mat-paginator #paginator
                    [length]="this.data.length"
