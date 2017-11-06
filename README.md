@@ -1,6 +1,6 @@
 # Project4
 
-##Description
+## Description
 Welcome to our project! 
 We are AnanAS, and we have created a movie database website (much like IMDB), except ours is called AMDB (Ananas Movie DataBase).
 In our application you can search through 1000 movies, sort alphabetically on title, and genre. You can also sort by release year.
@@ -12,7 +12,7 @@ Our site has a working register, and login page. It stores the user in the datab
 When a user logs in, the session is stored in local storage. A unique token is generated and is needed for the user to be able to
 access his or her profile. The routes are also protected. The user can logout as well, and we have implemented some validation in out forms.
 
-##Implementation (Our solution)
+## Implementation (Our solution)
 This project was initially generated with Angular CLI, but we are using the MEAN stack.
 That MEANs (no pun intended) that we are using MongoDB, Express, Angular and Node.
 
@@ -53,7 +53,7 @@ However, there are several requirements we still need to meet:
  us test our components. 
  
 
-##Run our project
+## Run our project
   1. Insert popcorn into microwave.
   2. Download the github repo. 
   2. Go to that folder in cmd/terminal
