@@ -4,12 +4,13 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.config.json",
     "build": "ng build && npm run dev",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dev": "nodemon server.js"
+
   },
   "private": true,
   "dependencies": {
