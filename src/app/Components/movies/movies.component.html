@@ -5,6 +5,15 @@
         <input matInput #filter placeholder="Search for title">
         <mat-hint><strong></strong>Search</mat-hint>
       </mat-form-field>
+    <mat-slider
+      class=""
+      [max]=10
+      [min]=0
+      [step]=0.1
+      [thumb-label]=true
+    (change)="toggleRating($event)"
+    >
+    </mat-slider>
   </div>
   <mat-button-toggle-group name="gruppe" (change)="toggleGenre($event)">
     <mat-button-toggle value="Action" >Action</mat-button-toggle>
@@ -21,9 +30,9 @@
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
       <!-- ID Column -->
-      <ng-container matColumnDef="_id">
-        <mat-header-cell *matHeaderCellDef > Rank </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{row._id}} </mat-cell>
+      <ng-container matColumnDef="Rating">
+        <mat-header-cell *matHeaderCellDef mat-sort-header > Rating </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.Rating}} </mat-cell>
       </ng-container>
       <!-- Title Column -->
       <ng-container matColumnDef="Title">

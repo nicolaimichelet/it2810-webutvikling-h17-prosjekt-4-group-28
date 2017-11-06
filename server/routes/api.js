@@ -102,7 +102,7 @@ router.get("/Movies", function(req, res) {
   if (query.limit !== undefined){
     limit2 = parseInt(query.limit);
   }else{
-    limit2 = parseInt(50)
+    limit2 = parseInt(1000)
   }
 
   db.collection(MOVIE_COLLECTION).find({}).limit(limit2).skip(page).toArray(function(err, docs) {
@@ -134,8 +134,9 @@ router.get("/Movies/genre", function(req, res) {
 
 // get specific movie by Rank
 router.get("/Movies/:id", function(req, res) {
+  console.log(req.params)
   console.log("id ble vlagt")
-  db.collection(MOVIE_COLLECTION).findOne({Rank: parseInt(req.params.id)}, function (err, doc) {
+  db.collection(MOVIE_COLLECTION).findOne({Title: (req.params.id)}, function (err, doc) {
     if (err) {
       handleError(res, err.message, "Failed to get movie");
     } else {

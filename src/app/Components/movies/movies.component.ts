@@ -21,8 +21,9 @@ import {MovieComponent} from '../movie/movie.component';
 
 
 export class MoviesComponent implements OnInit {
-  chosenGenre: any = ''
-  displayedColumns = ['_id', 'Title', 'Year', 'Genre'];
+  chosenGenre: any = '';
+  minRating: any = 0;
+  displayedColumns = ['Rating', 'Title', 'Year', 'Genre'];
   dataSource: ExampleDataSource | null;
   toggle: any = {Action: false, Adventure: false, Animation: false, Drama: false, Romance: false, Fantasy: false, Scifi: false};
   @ViewChild('filter') filter: ElementRef;
@@ -43,7 +44,6 @@ export class MoviesComponent implements OnInit {
       this.chosenGenre = name.value;
     }
 
-    console.log(this.chosenGenre);
     this.dataSource.toggl = this.chosenGenre;
   }
 
@@ -51,7 +51,7 @@ export class MoviesComponent implements OnInit {
     this.generateList()
     this.dataSource = new ExampleDataSource(this, this.paginator, this.sort);
     Observable.fromEvent(this.filter.nativeElement, 'keyup')
-      .debounceTime(150)
+      .debounceTime(300)
       .distinctUntilChanged()
       .subscribe(() => {
         if (!this.dataSource) { return; }
@@ -61,9 +61,9 @@ export class MoviesComponent implements OnInit {
 
   /** Sets the Movie data displyed on in the Pop-up. */
   openDialog(data) {
-    console.log(data)
-    this.movieDb.specificMovie(data._id).then( movies => {
+    this.movieDb.specificMovie(data.Title).then( movies => {
       data = {
+        '_id': movies._id,
         'Title': movies.Title,
         'Description': movies.Description,
         'Director': movies.Director,
@@ -81,7 +81,11 @@ export class MoviesComponent implements OnInit {
     });
   }
 
+toggleRating(item): void {
+  this.minRating = item.value;
+  this.dataSource.rating = this.minRating;
 
+}
 
   generateList() {
   this.movieDb.loadDb().then(movies => this.createList(movies));
@@ -108,29 +112,28 @@ export class MoviesComponent implements OnInit {
 
   /** Builds and returns a new movie. */
   private createNewMovie(i, movieList) {
-
+    const Id = movieList[i]._id;
     const Description = movieList[i].Description;
     const actors = movieList[i].actors;
     const Director = movieList[i].Director;
     const Genre = movieList[i].Genre;
-    const Runtime = movieList[i].Runtime;
     const Year = movieList[i].Year;
     const Title =  movieList[i].Title;
     const Rank =  movieList[i].Rank;
-
+    const Rating = movieList[i].Rating;
 
 
 
     return {
-      _id: (this.data.length + 1).toString(),
+      _id: Id,
       Description: Description,
       actors: actors,
       Director: Director,
       Genre: Genre,
-      Runtime: Runtime,
       Year: Year,
       Title: Title,
-      Rank: Rank
+      Rank: Rank,
+      Rating: Rating
 
     };
   }
@@ -143,9 +146,9 @@ export interface MovieData {
   Actors?: string;
   Director?: string;
   Genre?: string;
-  Runtime?: string;
   Year?: number;
   Title?: string;
   Rank: number;
+  Rating: number;
 }
 

@@ -37,7 +37,6 @@ export class MovieDb  implements OnInit{
   specificMovie(id): Promise<MovieData> {
 
     return this.http.get<MovieData>('/api/Movies/' + id).toPromise().then(data => {
-      console.log(data)
       if(isObject(data)){
         return data;
       }}).catch(this.handleError);

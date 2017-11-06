@@ -14,5 +14,4 @@ export class MovieComponent {
     this.thisDialogRef.close('Cancel');
   }
 
-
 }
