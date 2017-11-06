@@ -27,12 +27,14 @@ export class LoginComponent {
   ngOnInit() {
   }
 
+  //login submit buttom
   onLoginSubmit(){
     const user = {
       username: this.username,
       password: this.password
     };
 
+    //if user is NOT valid, display flash message
     if(!this.validateService.validateLogin(user)){
       this.flashMessage.show('Please fill in all fields', {cssClass: 'alert-danger', timeout: 3000});
       return false;

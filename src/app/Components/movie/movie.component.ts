@@ -13,4 +13,6 @@ export class MovieComponent {
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
   }
+
+
 }
