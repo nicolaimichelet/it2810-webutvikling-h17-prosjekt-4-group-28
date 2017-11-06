@@ -40,6 +40,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatStepperModule,
+
 } from '@angular/material';
 import {CdkTableModule} from '@angular/cdk/table';
 import { RegisterComponent } from './Components/register/register.component';
@@ -49,6 +50,7 @@ import { ProfileComponent } from './Components/profile/profile.component';
 
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
+import { MovieComponent } from './Components/movie/movie.component';
 
 //Declare our routing on webpage
 const appRoutes: Routes = [
@@ -63,7 +65,12 @@ const appRoutes: Routes = [
     RegisterComponent,
     NavbarComponent,
     ProfileComponent,
-    MoviesComponent, // Posts Component injected here
+    MoviesComponent,
+    MovieComponent
+     // Posts Component injected here
+  ],
+  entryComponents:[
+    MovieComponent
   ],
   //Must define our imports, use flash module, http, etc.
   imports: [
@@ -107,7 +114,8 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatTooltipModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
   providers: [MovieDb,ValidateService, AuthService],
   bootstrap: [AppComponent]

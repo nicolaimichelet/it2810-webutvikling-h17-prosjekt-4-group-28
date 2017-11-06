@@ -6,7 +6,7 @@
         <mat-hint><strong></strong>Search</mat-hint>
       </mat-form-field>
   </div>
-  <mat-button-toggle-group name="gruppe" (change)="test($event)">
+  <mat-button-toggle-group name="gruppe" (change)="toggleGenre($event)">
     <mat-button-toggle value="Action" >Action</mat-button-toggle>
     <mat-button-toggle value="Adventure">Adventure</mat-button-toggle>
     <mat-button-toggle value="Animation">Animation</mat-button-toggle>
@@ -50,7 +50,7 @@
 
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog(row)"></mat-row>
     </mat-table>
     <mat-paginator #paginator
                    [length]="this.data.length"
