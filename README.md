@@ -10,7 +10,7 @@ So basically our site has everything you need for the perfect movie night.
 
 Our site has a working register, and login page. It stores the user in the database and it also hashes the password.
 When a user logs in, the session is stored in local storage. A unique token is generated and is needed for the user to be able to
-access his or her profile. The routes are also protected. The user can logout as well, and we have implemented some validation in out forms.
+access his or her profile. The routes are also protected. The user can logout as well, and we have implemented some validation in our forms.
 
 ## Implementation (Our solution)
 This project was initially generated with Angular CLI, but we are using the MEAN stack.
@@ -47,10 +47,8 @@ However, there are several requirements we still need to meet:
  2. The site does not have dynamic loading of data yet. By switching the page in the list, the website should then load the next 10 movies, and so on.
  3. Our page has a "My profile" page, and it handles sessions securely. However, we need to add favorite movies on the profile page. 
  This means that a user should be able to select a favorite movie in the list, and we save it to the database and display it on profile. 
- 4. Our list still needs a "fancy" way of display. We plan to implement some sort of animations and we are working out a way to try to make something
- that makes sense. 
- 5. We are also going to write some tests, and prepare for next week. In our spec.ts files we can write tests and Angular-Cli and Karma can help 
- us test our components. 
+ 4. Our list still needs a "fancy" way of display. We plan to implement some sort of animations and we are working out a way to try to make something that makes sense. 
+ 5. We are also going to write some tests, and prepare for next week. In our spec.ts files we can write tests and Angular-Cli and Karma can help us test our components. 
  
 
 ## Run our project
