@@ -24,7 +24,6 @@ export class AuthService {
   }
 
   //Authenticate the user, make a post request.
-  //if succesful, return token and user info
   authenticateUser(user){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
@@ -32,6 +31,7 @@ export class AuthService {
       .map(res => res.json());
   }
 
+  //get the profile associated with token
   getProfile(){
     let headers = new Headers();
     this.loadToken();
@@ -40,25 +40,25 @@ export class AuthService {
     return this.http.get('http://localhost:8084/api/profile', {headers: headers})
       .map(res => res.json());
   }
-
-
+  //save the user in local storage
   storeUserData(token, user){
-    //save in local storage
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user)); //local storage can only store strings so we stringify
     this.authToken = token;
     this.user = user;
   }
 
+  //set the token
   loadToken(){
     const token = localStorage.getItem('id_token');
     this.authToken = token;
   }
-  //check token is there
+  //check if token is there
   loggedIn(){
     return tokenNotExpired('id_token');
   }
 
+  //clear local storage. Set user and token to null
   logout(){
     this.authToken = null;
     this.user = null;

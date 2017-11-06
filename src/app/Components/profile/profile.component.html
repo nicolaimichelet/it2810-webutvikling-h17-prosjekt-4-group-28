@@ -2,13 +2,16 @@
   <div *ngIf="user">
     <h2 class="page-header">Welcome {{user.name}}</h2>
 
-    <div class="alert alert-dismissible alert-info">
+ <!--   <div class="alert alert-dismissible alert-info" id="profileAlert">
       <span class="close" data-dismiss="alert">&times;</span>
       <strong>Hey there!</strong> <br>
       This is your profile page. Your recent searches will appear here. Enjoy AMDB!
-    </div>
+    </div>-->
+
 
     <ul class="list-group">
       <li class="list-group-item">Username: {{user.username}}</li>
     </ul>
+
+
   </div>
