@@ -130,7 +130,6 @@ toggleRating(item): void {
       actors: actors,
       Director: Director,
       Genre: Genre,
-      Runtime: Runtime,
       Year: Year,
       Title: Title,
       Rank: Rank,
