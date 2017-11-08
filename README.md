@@ -26,21 +26,7 @@ The data is retrieved from IMDB's api - one thousand movies from 2006-2016. It's
 We also use several plugins to help us on our way.
 On top of mongoDB, we use Mongoose. Mongoose acts as an intermediate between mongodb and our NodeJs. 
 In our server.js file we connect to the database with mongoose. We also define our middleware and json parsers for example. 
-````
-const UserSchema = mongoose.Schema({
-  name: {
-    type: String
-  },
-  username: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  }
-});
-````
+
 Our models folder defines a user, and adds a user. 
 Our config folder contains the link to the secret token and our link to the database. 
 Our server folder contains the rest api (all the interactions we need to interact with mongoDB). 
