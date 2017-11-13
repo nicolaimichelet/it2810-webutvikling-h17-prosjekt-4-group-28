@@ -13,5 +13,10 @@
       <li class="list-group-item">Username: {{user.username}}</li>
     </ul>
 
+    <div>
+      <div *ngFor="let favorite of favorites">
+        <h3 (click)="showInfo(favorite)">{{favorite}}</h3>
+      </div>
+    </div>
 
   </div>
