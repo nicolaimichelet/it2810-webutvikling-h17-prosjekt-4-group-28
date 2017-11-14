@@ -60,7 +60,8 @@ export class MoviesComponent implements OnInit {
     }
 
   /** Sets the Movie data displyed on in the Pop-up. */
-  openDialog(data) {
+  public openDialog(data) {
+    console.log(data);
     this.movieDb.specificMovie(data.Title).then( movies => {
       data = {
         '_id': movies._id,

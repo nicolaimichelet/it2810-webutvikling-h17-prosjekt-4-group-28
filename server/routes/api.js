@@ -6,6 +6,7 @@ const config =  require('../../config/database');
 const server = require('../../server');
 const User = require('../../models/user');
 const MOVIE_COLLECTION = "Movies";
+const USERS_COLLECTION = "users";
 const db = server.db;
 
 //Our api so far for interacting with mongodb
@@ -71,6 +72,26 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), (req,res)
   res.json({user: req.user});
 });
 
+//
+router.post('/favorite', (req,res) => {
+  let body = req.body
+
+  console.log(body);
+  console.log(body["username"]);
+  console.log(body.title);
+  console.log(req.username)
+
+  db.collection(USERS_COLLECTION).findOneAndUpdate({username: req.body.username}, {$addToSet: {favorites: req.body.title}}, {upsert: true}, function(err, doc){
+    console.log('funka');
+    if (err) {
+      console.log("Failed to update favorite");
+      console.log(err);
+    } else {
+      res.status(200).json(doc);
+    }
+  });
+});
+
 
 
 //get all movies, and sort based on values given
@@ -115,10 +136,10 @@ router.get("/Movies", function(req, res) {
 });
 
 
-// Få kun en sjanger med ?Genre=XXX
+// Get one genre with ?Genre=XXX
 router.get("/Movies/genre", function(req, res) {
-  var query = req.query
-  var find = ""
+  let query = req.query
+  let find = ""
   if (query.Genre){
     find= {Genre : {$regex : ".*"+query.Genre+".*"}}
   }

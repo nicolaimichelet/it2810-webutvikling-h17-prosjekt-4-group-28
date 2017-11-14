@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {tokenNotExpired} from "angular2-jwt";
+import {HttpParams} from "@angular/common/http";
 
 //Important to import http.
 
@@ -40,7 +41,7 @@ export class AuthService {
     return this.http.get('http://localhost:8084/api/profile', {headers: headers})
       .map(res => res.json());
   }
-  //save the user in local storage
+  //save the user in local storage as well for the session
   storeUserData(token, user){
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user)); //local storage can only store strings so we stringify
@@ -63,5 +64,16 @@ export class AuthService {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
+  }
+
+  //Set favorite
+  setFavorites(username, movie){
+    let headers = new Headers();
+    //we need to specify headers with content type and declare json
+    headers.append('Content-Type', 'application/json');
+    //specify where we want to insert and actually map it into json
+    let body = {username: username, title: movie};
+    return this.http.post('http://localhost:8084/api/favorite', body)
+      .map(res => res.json());
   }
 }
