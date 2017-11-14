@@ -27,15 +27,20 @@ export class ProfileComponent implements OnInit {
 
   //load profile on initialize
   ngOnInit() {
+    this.update()
+  }
+
+  update(){
     this.authService.getProfile().subscribe(profile => {
-      this.user = profile.user;
-      this.favorites = profile.user.favorites;
-      console.log(this.favorites);
-    },
-    err => {
-      console.log(err);
-      return false;
-    });
+        this.user = profile.user;
+        this.favorites = profile.user.favorites;
+        console.log(this.favorites);
+      },
+      err => {
+        console.log(err);
+        return false;
+      });
+
   }
 
   showInfo(favorite) : void {
@@ -55,6 +60,7 @@ export class ProfileComponent implements OnInit {
 
       dialog.afterClosed().subscribe(result => {
         this.dialogResult = result;
+        this.update();
       });
     });
   }
