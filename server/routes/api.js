@@ -72,15 +72,8 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), (req,res)
   res.json({user: req.user});
 });
 
-//
+//set the favorite route. Find one and update favorites.
 router.post('/favorite', (req,res) => {
-  let body = req.body
-
-  console.log(body);
-  console.log(body["username"]);
-  console.log(body.title);
-  console.log(req.username)
-
   db.collection(USERS_COLLECTION).findOneAndUpdate({username: req.body.username}, {$addToSet: {favorites: req.body.title}}, {upsert: true}, function(err, doc){
     console.log('funka');
     if (err) {
@@ -91,6 +84,21 @@ router.post('/favorite', (req,res) => {
     }
   });
 });
+
+//remove a favorite from the users favorites list
+router.delete('/favoriteDelete', (req,res) => {
+  console.log(req.query)
+  db.collection(USERS_COLLECTION).update({username: req.query.username}, {$pull: {favorites: req.query.title}}, function(err, doc){
+    console.log('fungertw');
+    if (err) {
+      console.log("Failed to delete favorite");
+      console.log(err);
+    } else {
+      res.status(200).json(doc);
+    }
+  });
+});
+
 
 
 
