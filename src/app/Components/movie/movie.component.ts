@@ -60,7 +60,6 @@ export class MovieComponent implements OnInit{
     else {
       console.log("nå skal det slettes")
       this.authService.removeFavorites(this.username, this.data.Title).subscribe(data=> {
-        console.log("hello");
         this.isFavorite = false;
       });
     }
