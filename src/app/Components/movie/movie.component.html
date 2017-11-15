@@ -10,7 +10,7 @@
   <hr>
   <mat-dialog-actions>
     <button mat-raised-button (click)="onCloseCancel()"><mat-icon class="playIcon">cancel</mat-icon></button>
-    <button mat-raised-button [hidden]="!showButton" [ngClass]="{ 'btn btn-warning': isFavorite, '': !isFavorite  }"  (click)="onFavorite()"><mat-icon id="favIcon" class="playIcon">star</mat-icon></button>
+    <button mat-raised-button [hidden]="!showButton" [ngClass]="{ 'btn btn-info': isFavorite, '': !isFavorite  }"  (click)="onFavorite()"><mat-icon id="favIcon" class="playIcon">star</mat-icon></button>
     <button class="btn btn-outline-secondary" (click)="onCloseCancel()" [routerLink]="['/login']" [hidden] = "showButton">Please log in to favorite a movie</button>
 
   </mat-dialog-actions>
