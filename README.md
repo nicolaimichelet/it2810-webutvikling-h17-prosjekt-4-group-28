@@ -1,5 +1,9 @@
 # Project4
 
+## Testing
+9 of our 12 tests pass. Tests are located in each spec.ts file. Only mount tests are implemented for now. 
+App.compontent.spec.ts file is done. The three components that won't mount yet are MovieSearch, MovieList, Movie. We are working on it. 
+
 ## Description
 Welcome to our project! 
 We are AnanAS, and we have created a movie database website (much like IMDB), except ours is called AMDB (Ananas Movie DataBase).
