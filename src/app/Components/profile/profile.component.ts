@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {FlashMessagesService} from "angular2-flash-messages";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
 import {MovieComponent} from "../movie/movie.component";
-import {MovieDb} from "../../movies.service";
+import {MovieDb} from "../../services/movies.service";
 
 @Component({
   selector: 'app-profile',

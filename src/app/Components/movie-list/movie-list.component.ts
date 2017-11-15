@@ -106,10 +106,8 @@ export class MovieListComponent implements OnInit {
   @HostListener('window:scroll', [])
   onWindowScroll() {
     if(this.canRenderNew) {
-      console.log('can render');
       let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
       if((window.innerHeight + window.scrollY) >= document.body.offsetHeight-100) {
-        console.log('do render');
         //reached bottom
         this.canRenderNew = false;
         this.renderTreshold += 10;
