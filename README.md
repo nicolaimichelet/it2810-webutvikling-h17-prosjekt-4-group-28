@@ -62,3 +62,21 @@ However, there are several requirements we still need to meet:
   5. Grab your popcorn and enjoy!
   
   (Update: due to recent changes in the bootswatch file, the navbar (and pretty much the whole css) doesn't work. We are working on it.)
+
+## API reference
+
+### Movies
+```
+GET /api/Movies
+```  
+Get movie list
+parameters:
+`limit`, `page`.
+Examples:
+```  
+/api/Movies?limit=XX&&page=XX
+```  
+``` 
+GET /api/Movies/:id
+```
+Get details for a specific movie.

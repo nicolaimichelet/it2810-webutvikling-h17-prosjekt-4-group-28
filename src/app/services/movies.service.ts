@@ -3,8 +3,8 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {isObject} from "util";
-import {MovieData} from "./Components/movies/movies.component";
 import 'rxjs/add/operator/toPromise';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class MovieDb  implements OnInit{
@@ -26,40 +26,39 @@ export class MovieDb  implements OnInit{
 
 
   }
-
+// returns all the movies Todo: limit and skip for dynamic loading
   loadDb(): Promise<MovieData[]> {
     return this.http.get<MovieData[]>('/api/Movies').toPromise().then(data => {
       if(isObject(data)){
         return data;
       }}).catch(this.handleError);
   }
-
+// Returns one movie
   specificMovie(id): Promise<MovieData> {
-
     return this.http.get<MovieData>('/api/Movies/' + id).toPromise().then(data => {
       if(isObject(data)){
         return data;
       }}).catch(this.handleError);
   }
-
-
-
-  list(){
-    return this.movieList;
-  }
-
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
+    console.error('An error occurred', error); // for debug only
     return Promise.reject(error.message || error);
   }
 
 
-  // Get all movies from the API
-// Eksempel på en url for sortering på år i stigende rekkefølge: /api/Movies?sort=Year&&order=ASC
+  getMovies(name: string, amount: number, index: number, genre: string, rating: number, sort: string, sortType: number): Observable<MovieData[]> {
+    return this.http.get<MovieData[]>('api/Movies/' + name + '/' + sort + '/' + sortType + '/' + genre + '/' + rating + '/' + index + '/' + amount);
+  }
+}
 
-
-/*  getAllPosts() {
-    return this.http.get('/api/Movies')
-      .map(res => res.json());
-  }*/
+export interface MovieData {
+  _id?: string;
+  Description?: string;
+  Actors?: string;
+  Director?: string;
+  Genre?: string;
+  Year?: number;
+  Title?: string;
+  Rank: number;
+  Rating: number;
 }

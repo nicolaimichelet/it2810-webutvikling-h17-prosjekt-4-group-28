@@ -1,0 +1,25 @@
+<div class="search-top-content">
+  <div class="input-search-wrapper"><input type="text" [(ngModel)]="searchInput" placeholder="Search here" class="input-search"></div>
+  <mat-slider
+    class=""
+    [max]=10
+    [min]=0
+    [step]=0.1
+    [thumb-label]=true
+    (change)="ratingNumber = $event.value"
+  >
+  </mat-slider>
+</div>
+<mat-button-toggle-group name="gruppe" (change)="genreString = $event.value" >
+  <mat-button-toggle value="Action" >Action</mat-button-toggle>
+  <mat-button-toggle value="Adventure">Adventure</mat-button-toggle>
+  <mat-button-toggle value="Animation">Animation</mat-button-toggle>
+  <mat-button-toggle value="Drama">Drama</mat-button-toggle>
+  <mat-button-toggle value="Romance">Romance</mat-button-toggle>
+  <mat-button-toggle value="Fantasy">Fantasy</mat-button-toggle>
+  <mat-button-toggle value="Sci-fi">Sci-fi</mat-button-toggle>
+  <mat-button-toggle value="none">Clear</mat-button-toggle>
+</mat-button-toggle-group>
+<br>
+
+<app-movie-list [search]="searchInput" [genreString]="genreString" [ratingNumber]="ratingNumber" #child></app-movie-list>

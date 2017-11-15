@@ -72,11 +72,48 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), (req,res)
 });
 
 
+router.get("/Movies/:search_string/:sort/:type/:genre/:rating/:index/:amount", function (req, res) {
+  let query = {}
+  if (req.params.search_string !== 'undefined'){
+    query = {
+      Title: {
+        "$regex": req.params.search_string,
+        "$options": "i"
+      }
+    }
+  }
+  if (req.params.genre !== 'none') {
+   query['Genre'] ={
+       "$regex": req.params.genre,
+       "$options": "i"
+     }
+  }
+  if (req.params.rating !== '0'){
+    query['Rating']= {
+      $gte: parseFloat(req.params.rating)
+    }
+  }
+
+  const offset = parseInt(req.params.index);
+  amount = parseInt(req.params.amount);
+  console.log(req.params)
+  console.log(req.params.type)
+  console.log({[req.params.sort]: req.params.type})
+  db.collection(MOVIE_COLLECTION).find(query).sort(req.params.sort === 'none' ? {} : {[req.params.sort]: parseInt(req.params.type)})
+    .skip(offset).limit(amount < 0 ? undefined : amount).toArray((err, docs) => {
+    if (err) console.log(res, err, 500);
+    res.status(200).json(docs);
+  });
+
+});
+
+
 
 //get all movies, and sort based on values given
-router.get("/Movies", function(req, res) {
+//todo: fix limit and skip fordynamic loading
+/*router.get("/Movies", function(req, res) {
   let query = req.query;
-  /*  console.log(query.sort);
+  /!*  console.log(query.sort);
     let sort ={};
     let find= {};
     if(query.sort){
@@ -95,24 +132,23 @@ router.get("/Movies", function(req, res) {
     if(query.gt){
       find["Rating"] ={$gt : query.gt}
     }
-    console.log(find)*/
+    console.log(find)*!/
   const page = req.query.page * 10;
-  let limit2 = 50;
-  console.log("limit" + query.limit)
-  if (query.limit !== undefined){
+  let limit2 = 10;
+  if (query.limit){
     limit2 = parseInt(query.limit);
   }else{
     limit2 = parseInt(1000)
   }
 
-  db.collection(MOVIE_COLLECTION).find({}).limit(limit2).skip(page).toArray(function(err, docs) {
+  db.collection(MOVIE_COLLECTION).find({}).limit(limit2).toArray(function(err, docs) {
     if (err) {
       handleError(res, err.message, "Failed to get movies.");
     } else {
       res.status(200).json(docs);
     }
   });
-});
+});*/
 
 
 // Få kun en sjanger med ?Genre=XXX
