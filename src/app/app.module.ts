@@ -1,10 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FlashMessagesModule } from 'angular2-flash-messages/module';
 import {NgModule, OnInit} from '@angular/core';
-import { MovieDb } from './movies.service';
+import { MovieDb } from './services/movies.service';
 import { AppComponent } from './app.component';
 import {HttpModule} from '@angular/http';
-import {MoviesComponent} from './Components/movies/movies.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -54,13 +53,15 @@ import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
 import { MovieComponent } from './Components/movie/movie.component';
 import {AuthGuard} from "./guards/auth.guard";
+import { MovieListComponent } from './Components/movie-list/movie-list.component';
+import { MovieSearchComponent } from './Components/movie-search/movie-search.component';
 
 // Declare our routing on webpage
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-  {path: 'home', component: MoviesComponent},
-  {path:'login', component: LoginComponent}
+  {path: 'home', component: MovieSearchComponent},
+  {path: 'login', component: LoginComponent,}
 ];
 
 @NgModule({
@@ -70,8 +71,9 @@ const appRoutes: Routes = [
     RegisterComponent,
     NavbarComponent,
     ProfileComponent,
-    MoviesComponent,
-    MovieComponent
+    MovieComponent,
+    MovieListComponent,
+    MovieSearchComponent
   ],
   entryComponents:[
     MovieComponent

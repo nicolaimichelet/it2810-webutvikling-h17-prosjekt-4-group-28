@@ -1,12 +1,12 @@
 <div id="popUpBox">
   <h2 mat-dialog-title>{{data.Title}} ({{data.Year}})</h2>
   <hr>
-  <mat-dialog-content>
+  <div mat-dialog-content>
     <p><span class="infoType">Genre:</span> <span class="infoDetails">{{data.Genre}}</span></p>
     <p><span class="infoType">Director:</span> <span class="infoDetails">{{data.Director}}</span></p>
     <p><span class="infoType">Actors:</span> <span class="infoDetails">{{data.Actors}}</span></p>
     <p><span class="infoType">Plot:</span> <span class="infoDetails">{{data.Description}}</span></p>
-  </mat-dialog-content>
+  </div>
   <hr>
   <mat-dialog-actions>
     <button mat-raised-button (click)="onCloseCancel()"><mat-icon class="playIcon">cancel</mat-icon></button>
