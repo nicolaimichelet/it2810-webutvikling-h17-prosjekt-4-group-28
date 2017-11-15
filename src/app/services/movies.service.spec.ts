@@ -1,11 +1,12 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { MovieDb } from './movies.service';
+import {HttpClient, HttpHandler} from "@angular/common/http";
 
 describe('MovieDb', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MovieDb]
+      providers: [MovieDb, HttpClient, HttpHandler]
     });
   });
 

@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {ValidateService} from "../../services/validate.service";
 import {Router} from '@angular/router';
