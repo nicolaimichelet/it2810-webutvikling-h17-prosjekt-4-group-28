@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {ValidateService} from "../../services/validate.service";
 import {Router} from '@angular/router';
@@ -16,6 +16,7 @@ export class ProfileComponent implements OnInit {
   user:Object;
   favorites = [];
   dialogResult = '';
+  showProfileInfo = false;
   //inject as dependencies
   constructor(
     public dialog: MatDialog,
@@ -28,12 +29,19 @@ export class ProfileComponent implements OnInit {
   //load profile on initialize
   ngOnInit() {
     this.update()
+
   }
 
   update(){
     this.authService.getProfile().subscribe(profile => {
         this.user = profile.user;
         this.favorites = profile.user.favorites;
+        if ((this.favorites.length > 0)){
+          this.showProfileInfo = false;
+        }
+        else {
+          this.showProfileInfo = true;
+        }
         console.log(this.favorites);
       },
       err => {
@@ -57,7 +65,6 @@ export class ProfileComponent implements OnInit {
       const dialog = this.dialog.open(MovieComponent, {
         data,
       });
-
       dialog.afterClosed().subscribe(result => {
         this.dialogResult = result;
         this.update();

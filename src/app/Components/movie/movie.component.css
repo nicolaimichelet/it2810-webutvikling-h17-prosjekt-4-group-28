@@ -1,9 +1,5 @@
-.lagt{
-  background-color: white;
-}
-.ikkelagt{
-  background-color: black;
-}
+
+@import "../../../bootstrap.min.css";
 
 #logInToFavorite {
   padding-left: 1em;
