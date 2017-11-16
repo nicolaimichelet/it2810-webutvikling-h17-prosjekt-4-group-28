@@ -13,16 +13,14 @@ import {MovieComponent} from '../movie/movie.component';
 export class MovieListComponent implements OnInit {
 
   constructor(
-    private movieListService: MovieDb,
-    private http: HttpClient,
     public dialog: MatDialog,
     public movieDb: MovieDb,
   ) { }
 
   movies: MovieData[];
 
-  public renderTreshold = 20;
-  canRenderNew = true;
+  public limit = 20;
+  bottom = true;
   sort: string = 'none';
   sortType: number = 1;
   @Input() searchString: string;
@@ -45,18 +43,17 @@ export class MovieListComponent implements OnInit {
     this.ngOnChanges(event.active);
   }
   ngOnChanges(changes: any) {
-      this.renderTreshold = 30;
+      this.limit = 30;
       this.getMovies();
   }
 
 
   public getMovies(): void {
-    console.log(this.searchString)
     this.isloading = true
-    this.movieListService.getMovies(this).then(movies => {
+    this.movieDb.getMovies(this).then(movies => {
       this.movies = movies;
-      this.canRenderNew = true;
-      this.isloading = false
+      this.bottom = true;
+      this.isloading = false;
     });
   }
   ngOnInit() {
@@ -70,7 +67,6 @@ export class MovieListComponent implements OnInit {
       const dialog = this.dialog.open(MovieComponent, {
         data,
       });
-
       dialog.afterClosed().subscribe(result => {
         this.dialogResult = result;
       });
@@ -80,10 +76,10 @@ export class MovieListComponent implements OnInit {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    if(this.canRenderNew) {
-      if((window.innerHeight + window.scrollY) >= document.body.offsetHeight-100) {
-        this.canRenderNew = false;
-        this.renderTreshold += 10;
+    if(this.bottom) {
+      if(window.innerHeight + window.scrollY >= document.body.scrollHeight-100) {
+        this.bottom = false;
+        this.limit += 10;
         this.getMovies();
       }
     }

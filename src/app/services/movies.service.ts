@@ -25,7 +25,7 @@ export class MovieDb{
       + '/' + data.sortType
       + '/' + data.genreString
       + '/' + data.ratingNumber
-      + '/' + data.renderTreshold).toPromise().then(movie =>{
+      + '/' + data.limit).toPromise().then(movie =>{
         if(isObject(movie)){
           return movie;
         }

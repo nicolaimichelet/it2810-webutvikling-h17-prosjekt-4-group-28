@@ -123,9 +123,8 @@ router.get("/Movies/:search_string/:sort/:type/:genre/:rating/:amount", function
     }
   }
 
-  amount = parseInt(req.params.amount);
   db.collection(MOVIE_COLLECTION).find(query).sort(req.params.sort === 'none' ? {} : {[req.params.sort]: parseInt(req.params.type)})
-    .limit(amount < 0 ? undefined : amount).toArray((err, docs) => {
+    .limit(parseInt(req.params.amount)).toArray((err, docs) => {
     if (err) console.log(res, err, 500);
     res.status(200).json(docs);
   });
