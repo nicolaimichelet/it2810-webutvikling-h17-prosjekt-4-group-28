@@ -7,11 +7,11 @@
     <th mat-sort-header="Year">Year</th>
   </tr>
   <tr *ngFor="let x of movies" (click)="openDialog(x)">
-    <td>{{ x.Title }}</td>
+    <td class="lol">{{ x.Title }}</td>
     <td>{{ x.Rating }}</td>
     <td>{{x.Genre}}</td>
     <td>{{x.Year}}</td>
   </tr>
 </table>
+  <div class="icon"><i class='fa fa-spinner fa-5x fa-spin' style="" [hidden]="!isloading"></i></div>
 </div>
-
