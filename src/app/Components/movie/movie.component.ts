@@ -17,7 +17,9 @@ export class MovieComponent implements OnInit{
 
   constructor(public thisDialogRef: MatDialogRef<MovieComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
               private flashMessage: FlashMessagesService,
-              private authService: AuthService) { }
+              private authService: AuthService) {
+    console.log(data)
+  }
 
   ngOnInit() {
     if (this.authService.loggedIn()){

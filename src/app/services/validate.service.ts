@@ -7,7 +7,7 @@ export class ValidateService {
 
   //check if name, username and password is undefined
   validateRegister(user){
-    if(user.name == undefined || user.username == undefined || user.password == undefined){
+    if(user.name === undefined || user.username === undefined || user.password === undefined || user.name === '' || user.username === '' || user.password === ''){
       return false;
     } else {
       return true;
