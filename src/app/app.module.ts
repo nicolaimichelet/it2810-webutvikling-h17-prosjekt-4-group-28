@@ -55,12 +55,14 @@ import { MovieComponent } from './Components/movie/movie.component';
 import {AuthGuard} from "./guards/auth.guard";
 import { MovieListComponent } from './Components/movie-list/movie-list.component';
 import { MovieSearchComponent } from './Components/movie-search/movie-search.component';
+import { HomeComponent} from './Components/home/home.component';
 
 // Declare our routing on webpage
 const appRoutes: Routes = [
+  {path: 'home', component: HomeComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-  {path: 'home', component: MovieSearchComponent},
+  {path: 'movies', component: MovieSearchComponent},
   {path: 'login', component: LoginComponent,}
 ];
 
@@ -73,7 +75,8 @@ const appRoutes: Routes = [
     ProfileComponent,
     MovieComponent,
     MovieListComponent,
-    MovieSearchComponent
+    MovieSearchComponent,
+    HomeComponent
   ],
   entryComponents:[
     MovieComponent

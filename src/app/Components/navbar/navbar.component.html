@@ -4,13 +4,13 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarColor01">
-    <ul class="navbar-nav mr-auto">
+  <div class="collapse navbar-collapse" id="navbarColor01"  >
+    <ul class="navbar-nav mr-auto"  style="margin-bottom: 0px">
       <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
-        <a class="nav-link" [routerLink]="['/home']">Home</a>
+        <a class="nav-link" [routerLink]="['/movies']">Movies</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <form class="form-inline my-2 my-lg-0" style="float: right" >
       <ul class="navbar-nav mr-auto">
         <li *ngIf="!authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
           <a class="nav-link" [routerLink]="['/login']">Login</a>
