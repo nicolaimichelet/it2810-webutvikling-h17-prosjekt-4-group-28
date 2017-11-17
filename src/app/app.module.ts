@@ -55,15 +55,18 @@ import { MovieComponent } from './Components/movie/movie.component';
 import {AuthGuard} from "./guards/auth.guard";
 import { MovieListComponent } from './Components/movie-list/movie-list.component';
 import { MovieSearchComponent } from './Components/movie-search/movie-search.component';
+import { HomeComponent} from './Components/home/home.component';
+
 import { ChartComponent } from './Components/chart/chart.component';
 import { ChartsModule } from 'ng2-charts';
 
 // Declare our routing on webpage
 const appRoutes: Routes = [
+  {path: 'home', component: HomeComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-  {path: 'home', component: MovieSearchComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'movies', component: MovieSearchComponent},
+  {path: 'login', component: LoginComponent,}
 ];
 
 @NgModule({
@@ -76,6 +79,7 @@ const appRoutes: Routes = [
     MovieComponent,
     MovieListComponent,
     MovieSearchComponent,
+    HomeComponent,
     ChartComponent
   ],
   entryComponents:[

@@ -1,1 +1,30 @@
-@import "../../../bootstrap.min.css";
+.page-header{
+  color: white;
+  font-weight:400;
+}
+.username {
+  font-size: small;
+  color: white;
+  text-align: right;
+  padding-right: 2%;
+}
+.favs{
+  color: white;
+  font-size: medium;
+}
+.favbox{
+  background-color: #3A3F44;
+
+}
+.favorites{
+  color: white;
+  font-size: small;
+  padding: 1%;
+}
+.favorites:hover{
+  text-shadow: 1px 2px #000 ;
+  font-size: 110%;
+}
+img{
+  padding-bottom: 5px;
+}
