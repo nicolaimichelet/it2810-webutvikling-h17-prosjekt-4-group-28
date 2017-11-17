@@ -31,6 +31,19 @@ export class MovieDb{
         }
     }).catch(err => console.log('error' + err));
   }
+
+  getMovieRatings(data): Promise<any []> {
+    return this.http.get<MovieData[]>('api/count/'
+      + (data.searchString === '' ? 'undefined' : data.searchString)
+      + '/' + data.genreString
+      + '/' + data.ratingNumber).toPromise().then(movie =>{
+      console.log(movie);
+      if(isObject(movie)){
+
+        return movie;
+      }
+    }).catch(err => console.log(err));
+  }
 }
 
 export interface MovieData {

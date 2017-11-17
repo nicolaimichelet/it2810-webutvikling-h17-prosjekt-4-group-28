@@ -64,7 +64,6 @@ const appRoutes: Routes = [
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'home', component: MovieSearchComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'chart', component: ChartComponent},
 ];
 
 @NgModule({

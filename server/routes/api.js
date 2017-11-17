@@ -205,7 +205,7 @@ router.get("/Movies/:id", function(req, res) {
   })
 });
 
-router.get("/count/:search_string/:type/:genre/:rating", function (req, res) {
+router.get("/count/:search_string/:genre/:rating", function (req, res) {
   let query = {}
   if (req.params.search_string !== 'undefined'){
     query = {
@@ -235,29 +235,29 @@ router.get("/count/:search_string/:type/:genre/:rating", function (req, res) {
       "_id": {
         "$cond": [
           { "$lte": [ "$Rating", 2 ] },
-          "1-2",
+          "1",
           { "$cond": [
             { "$lte": [ "$Rating", 3 ] },
-            "2-3",
+            "2",
             { "$cond": [
               { "$lte": [ "$Rating", 4 ] },
-              "3-4",
+              "3",
               { "$cond": [
                 { "$lte": [ "$Rating", 5 ] },
-                "4-5",
+                "4",
                 { "$cond": [
                   { "$lte": [ "$Rating", 6 ] },
-                  "5-6",
+                  "5",
                   { "$cond": [
                     { "$lte": [ "$Rating", 7 ] },
-                    "6-7",
+                    "6",
                     { "$cond": [
                       { "$lte": [ "$Rating", 8 ] },
-                      "7-8",
+                      "7",
                       { "$cond": [
                         { "$lte": [ "$Rating", 9 ] },
-                        "8-9",
-                        "9-10"
+                        "8",
+                        "9"
                       ]}
                     ]}
                   ]}
