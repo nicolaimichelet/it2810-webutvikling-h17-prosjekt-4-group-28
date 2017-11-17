@@ -55,13 +55,15 @@ import { MovieComponent } from './Components/movie/movie.component';
 import {AuthGuard} from "./guards/auth.guard";
 import { MovieListComponent } from './Components/movie-list/movie-list.component';
 import { MovieSearchComponent } from './Components/movie-search/movie-search.component';
+import { ChartComponent } from './Components/chart/chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 // Declare our routing on webpage
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'home', component: MovieSearchComponent},
-  {path: 'login', component: LoginComponent,}
+  {path: 'login', component: LoginComponent},
 ];
 
 @NgModule({
@@ -73,13 +75,15 @@ const appRoutes: Routes = [
     ProfileComponent,
     MovieComponent,
     MovieListComponent,
-    MovieSearchComponent
+    MovieSearchComponent,
+    ChartComponent
   ],
   entryComponents:[
     MovieComponent
   ],
   // Must define our imports, use flash module, http, etc.
   imports: [
+    ChartsModule,
     FormsModule,
     HttpModule,
     FlashMessagesModule,

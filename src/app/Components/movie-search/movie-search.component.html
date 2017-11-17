@@ -14,6 +14,7 @@
   <mat-button-toggle value="Action" >Action</mat-button-toggle>
   <mat-button-toggle value="Adventure">Adventure</mat-button-toggle>
   <mat-button-toggle value="Animation">Animation</mat-button-toggle>
+  <mat-button-toggle value="Comedy">Comedy</mat-button-toggle>
   <mat-button-toggle value="Drama">Drama</mat-button-toggle>
   <mat-button-toggle value="Romance">Romance</mat-button-toggle>
   <mat-button-toggle value="Fantasy">Fantasy</mat-button-toggle>
@@ -22,4 +23,8 @@
 </mat-button-toggle-group>
 <br>
 
+
+<app-chart [searchString]="searchInput" [genreString]="genreString" [ratingNumber]="ratingNumber"></app-chart>
+
 <app-movie-list [searchString]="searchInput" [genreString]="genreString" [ratingNumber]="ratingNumber"></app-movie-list>
+

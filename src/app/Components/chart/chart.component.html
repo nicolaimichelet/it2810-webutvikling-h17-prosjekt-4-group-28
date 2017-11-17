@@ -1,0 +1,25 @@
+<mat-accordion>
+<mat-expansion-panel (opened)="panelOpenState = true; ngOnChanges(true)"
+                     (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Click here to view rating graph
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div>
+    <div style="display: block">
+      <canvas baseChart
+              [colors] = "chartColors"
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="lineChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+</mat-expansion-panel>
+</mat-accordion>
+
+
