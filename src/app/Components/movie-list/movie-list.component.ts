@@ -13,32 +13,29 @@ import {MovieComponent} from '../movie/movie.component';
 export class MovieListComponent implements OnInit {
 
   constructor(
-    private movieListService: MovieDb,
-    private http: HttpClient,
     public dialog: MatDialog,
     public movieDb: MovieDb,
   ) { }
 
   movies: MovieData[];
 
-  index = 0;
-  public renderTreshold = 30;
-  canRenderNew = true;
+  public limit = 20;
+  bottom = true;
   sort: string = 'none';
   sortType: number = 1;
-  @Input('search') searchString: string;
+  @Input() searchString: string;
   @Input() genreString: string;
   @Input() ratingNumber: number;
   dialogResult = '';
+  isloading = false
 
   sortData(event){
-    console.log(event)
     this.sort = event.active;
     if (event.direction === 'asc'){
-      this.sortType = 1
+      this.sortType = 1;
     }
     else if(event.direction === 'desc'){
-      this.sortType = -1
+      this.sortType = -1;
     }
     else(
       this.sort = 'none'
@@ -46,56 +43,30 @@ export class MovieListComponent implements OnInit {
     this.ngOnChanges(event.active);
   }
   ngOnChanges(changes: any) {
-    console.log(changes)
-    console.log(this.searchString)
-    if (this.searchString || this.searchString === "") {
-      this.renderTreshold = 30;
-      this.getMovieByName();
-    } else {
-      this.clearMovies();
-    }
+      this.limit = 30;
+      this.getMovies();
   }
 
-  public clearMovies(): void {
-    this.movies = [];
-  }
 
-  public getMovieByName(): void {
-    console.log(this.searchString)
-    this.movieListService.getMovies(
-      this.searchString === "" ? 'undefined' : this.searchString,
-      this.renderTreshold,
-      this.index,
-      this.genreString.length > 0  ? this.genreString : 'none',
-      this.ratingNumber > 0 ? this.ratingNumber : 0,
-      this.sort ? this.sort : 'none',
-      this.sortType ? this.sortType : -1)
-      .subscribe(movies => {
+  public getMovies(): void {
+    this.isloading = true
+    this.movieDb.getMovies(this).then(movies => {
       this.movies = movies;
-      this.canRenderNew = true;
+      this.bottom = true;
+      this.isloading = false;
     });
   }
   ngOnInit() {
-    this.getMovieByName();
+    this.getMovies();
   }
 
 
   public openDialog(data) {
     console.log(data);
-    this.movieDb.specificMovie(data.Title).then( movies => {
-      data = {
-        '_id': movies._id,
-        'Title': movies.Title,
-        'Description': movies.Description,
-        'Director': movies.Director,
-        'Genre': movies.Genre,
-        'Year': movies.Year,
-        'Actors': movies.Actors
-      };
+    this.movieDb.specificMovie(data.Title).then( data => {
       const dialog = this.dialog.open(MovieComponent, {
         data,
       });
-
       dialog.afterClosed().subscribe(result => {
         this.dialogResult = result;
       });
@@ -105,13 +76,11 @@ export class MovieListComponent implements OnInit {
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    if(this.canRenderNew) {
-      let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-      if((window.innerHeight + window.scrollY) >= document.body.offsetHeight-100) {
-        //reached bottom
-        this.canRenderNew = false;
-        this.renderTreshold += 10;
-        this.getMovieByName();
+    if(this.bottom) {
+      if(window.innerHeight + window.scrollY >= document.body.scrollHeight-100) {
+        this.bottom = false;
+        this.limit += 10;
+        this.getMovies();
       }
     }
   }

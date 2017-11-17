@@ -57,6 +57,9 @@ import { MovieListComponent } from './Components/movie-list/movie-list.component
 import { MovieSearchComponent } from './Components/movie-search/movie-search.component';
 import { HomeComponent} from './Components/home/home.component';
 
+import { ChartComponent } from './Components/chart/chart.component';
+import { ChartsModule } from 'ng2-charts';
+
 // Declare our routing on webpage
 const appRoutes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -76,13 +79,15 @@ const appRoutes: Routes = [
     MovieComponent,
     MovieListComponent,
     MovieSearchComponent,
-    HomeComponent
+    HomeComponent,
+    ChartComponent
   ],
   entryComponents:[
     MovieComponent
   ],
   // Must define our imports, use flash module, http, etc.
   imports: [
+    ChartsModule,
     FormsModule,
     HttpModule,
     FlashMessagesModule,

@@ -20,7 +20,7 @@ export class AuthService {
     //we need to specify headers with content type and declare json
     headers.append('Content-Type', 'application/json');
     //specify where we want to insert and actually map it into json
-    return this.http.post('http://localhost:8084/api/register', user, {headers: headers})
+    return this.http.post('api/register', user, {headers: headers})
       .map(res => res.json());
   }
 
@@ -28,7 +28,7 @@ export class AuthService {
   authenticateUser(user){
     let headers = new Headers();
     headers.append('Content-Type','application/json');
-    return this.http.post('http://localhost:8084/api/authenticate', user,{headers: headers})
+    return this.http.post('api/authenticate', user,{headers: headers})
       .map(res => res.json());
   }
 
@@ -38,7 +38,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type','application/json');
-    return this.http.get('http://localhost:8084/api/profile', {headers: headers})
+    return this.http.get('api/profile', {headers: headers})
       .map(res => res.json());
   }
   //save the user in local storage as well for the session

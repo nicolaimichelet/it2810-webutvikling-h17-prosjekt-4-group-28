@@ -1,1 +1,8 @@
 @import "../../../bootstrap.min.css";
+.fa-spinner {
+  color: #5bc0de;
+}
+.icon{
+margin: 0 auto;
+  display:table
+}

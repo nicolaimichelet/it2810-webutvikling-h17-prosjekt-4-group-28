@@ -2,12 +2,16 @@
   <div *ngIf="user">
     <h2 class="page-header"><h2 class="username">Username: {{user.username}}<img src="../../assets/pineapplesimple.png" height="20px"></h2>Welcome {{user.name}} </h2>
 
- <!--   <div class="alert alert-dismissible alert-info" id="profileAlert">
-      <span class="close" data-dismiss="alert">&times;</span>
-      <strong>Hey there!</strong> <br>
-      This is your profile page. Your recent searches will appear here. Enjoy AMDB!
-    </div>-->
-    <br><br>
+
+    <div [hidden]="!showProfileInfo" class="alert alert-dismissible alert-info" id="profileAlert">
+      <strong>Hey there!</strong> <br> Welcome to your profile page. This page holds your personal information, as well as any
+      movies you favorite. <br> To see more information about a movie, click on it in the list. You can also unfavorite a movie,
+      by clicking the favorite button again.
+      <br><br> This alert will dismiss once you favorite a movie. Head over to the
+      movie page to start favoriting. <br> Cheers! <br>
+      The AMDB Team
+    </div>
+          <br><br>
     <h2 class="favs">Your favorites:</h2>
     <div class="favbox">
       <div *ngFor="let favorite of favorites">

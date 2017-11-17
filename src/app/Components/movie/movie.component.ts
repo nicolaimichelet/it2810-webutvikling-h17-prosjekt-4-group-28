@@ -16,8 +16,9 @@ export class MovieComponent implements OnInit{
   showButton = false;
 
   constructor(public thisDialogRef: MatDialogRef<MovieComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-              private flashMessage: FlashMessagesService,
-              private authService: AuthService) { }
+              private authService: AuthService) {
+    console.log(data)
+  }
 
   ngOnInit() {
     if (this.authService.loggedIn()){
@@ -60,7 +61,6 @@ export class MovieComponent implements OnInit{
     else {
       console.log("nå skal det slettes")
       this.authService.removeFavorites(this.username, this.data.Title).subscribe(data=> {
-        console.log("hello");
         this.isFavorite = false;
       });
     }
