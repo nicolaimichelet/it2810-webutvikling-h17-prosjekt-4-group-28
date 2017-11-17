@@ -101,7 +101,7 @@ router.delete('/favoriteDelete', (req,res) => {
 
 
 
-router.get("/Movies/:search_string/:sort/:type/:genre/:rating/:index/:amount", function (req, res) {
+router.get("/Movies/:search_string/:sort/:type/:genre/:rating/:amount", function (req, res) {
   let query = {}
   if (req.params.search_string !== 'undefined'){
     query = {
@@ -123,13 +123,8 @@ router.get("/Movies/:search_string/:sort/:type/:genre/:rating/:index/:amount", f
     }
   }
 
-  const offset = parseInt(req.params.index);
-  amount = parseInt(req.params.amount);
-  console.log(req.params)
-  console.log(req.params.type)
-  console.log({[req.params.sort]: req.params.type})
   db.collection(MOVIE_COLLECTION).find(query).sort(req.params.sort === 'none' ? {} : {[req.params.sort]: parseInt(req.params.type)})
-    .skip(offset).limit(amount < 0 ? undefined : amount).toArray((err, docs) => {
+    .limit(parseInt(req.params.amount)).toArray((err, docs) => {
     if (err) console.log(res, err, 500);
     res.status(200).json(docs);
   });

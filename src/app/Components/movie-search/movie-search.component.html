@@ -1,5 +1,5 @@
 <div class="search-top-content">
-  <div class="input-search-wrapper"><input type="text" [(ngModel)]="searchInput" placeholder="Search here" class="input-search"></div>
+  <input type="text" [(ngModel)]="searchInput" placeholder="Search here" class="input-search">
   <mat-slider
     class=""
     [max]=10
@@ -21,4 +21,6 @@
   <mat-button-toggle value="none">Clear</mat-button-toggle>
 </mat-button-toggle-group>
 <br>
-<app-movie-list [search]="searchInput" [genreString]="genreString" [ratingNumber]="ratingNumber" #child></app-movie-list>
+
+<app-movie-list [searchString]="searchInput" [genreString]="genreString" [ratingNumber]="ratingNumber"></app-movie-list>
+
