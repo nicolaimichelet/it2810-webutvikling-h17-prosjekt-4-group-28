@@ -20,10 +20,10 @@
         </li>
 
         <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
-          <a class="nav-link" (click)="onLogoutClick()" href="#">Logout</a>
+          <a class="nav-link" [routerLink]="['/profile']">Profile</a>
         </li>
         <li *ngIf="authService.loggedIn()" class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
-          <a class="nav-link" [routerLink]="['/profile']">Profile</a>
+          <a class="nav-link" (click)="onLogoutClick()" href="#">Logout</a>
         </li>
       </ul>
     </form>

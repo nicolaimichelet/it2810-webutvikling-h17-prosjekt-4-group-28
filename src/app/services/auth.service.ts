@@ -73,7 +73,7 @@ export class AuthService {
     headers.append('Content-Type', 'application/json');
     //specify where we want to insert and actually map it into json
     let body = {username: username, title: movie};
-    return this.http.post('http://localhost:8084/api/favorite', body)
+    return this.http.post('api/favorite', body)
       .map(res => res.json());
   }
 
@@ -83,7 +83,7 @@ export class AuthService {
     headers.append('Content-Type', 'application/json');
     //specify where we want to insert and actually map it into json
     let data = {username: username, title: movie};
-    return this.http.delete('http://localhost:8084/api/favoriteDelete', {params: {username: username, title: movie}})
+    return this.http.delete('api/favoriteDelete', {params: {username: username, title: movie}})
       .map(res => res.json());
   }
 }
