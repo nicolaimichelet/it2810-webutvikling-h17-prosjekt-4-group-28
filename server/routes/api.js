@@ -192,13 +192,13 @@ router.get("/Movies/genre", function(req, res) {
   });
 });
 
-// get specific movie by Rank
+// get specific movie-module by Rank
 router.get("/Movies/:id", function(req, res) {
   console.log(req.params)
   console.log("id ble vlagt")
   db.collection(MOVIE_COLLECTION).findOne({Title: (req.params.id)}, function (err, doc) {
     if (err) {
-      handleError(res, err.message, "Failed to get movie");
+      handleError(res, err.message, "Failed to get movie-module");
     } else {
       res.status(200).json(doc);
     }

@@ -2,7 +2,7 @@
   <div class="search-top-content">
   <input type="text" [(ngModel)]="searchInput" placeholder="Search here" class="input-search">
 
-  <h2 style="  color: white;font-size: small; padding-top: 2%">Choose minimum rating: </h2>
+  <h2 style=" margin-left: 1em; color: white;font-size: 1.2em; padding-top: 2%">Rating: </h2>
   <mat-slider
     class=""
     [max]=10
@@ -10,10 +10,13 @@
     [step]=0.1
     [thumb-label]=true
     (change)="ratingNumber = $event.value"
-  >Choose
+  >
   </mat-slider>
 </div>
-<mat-button-toggle-group name="gruppe" (change)="genreString = $event.value" >
+<br>
+  <app-chart [searchString]="searchInput" [genreString]="genreString" [ratingNumber]="ratingNumber"></app-chart>
+  <h2 style="  color: white;font-size: 1.2em; padding-top: 2%">Genre:</h2>
+<mat-button-toggle-group id="toggleGroup" name="gruppe" (change)="genreString = $event.value" >
   <mat-button-toggle value="Action" >Action</mat-button-toggle>
   <mat-button-toggle value="Adventure">Adventure</mat-button-toggle>
   <mat-button-toggle value="Animation">Animation</mat-button-toggle>
@@ -25,9 +28,6 @@
   <mat-button-toggle value="none">Clear</mat-button-toggle>
 </mat-button-toggle-group>
 <br>
-
-<app-chart [searchString]="searchInput" [genreString]="genreString" [ratingNumber]="ratingNumber"></app-chart>
-
 <app-movie-list [searchString]="searchInput" [genreString]="genreString" [ratingNumber]="ratingNumber"></app-movie-list>
 </div>
 

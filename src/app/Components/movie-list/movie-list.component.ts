@@ -3,7 +3,7 @@ import {MovieData} from '../../services/movies.service';
 import {HttpClient} from '@angular/common/http';
 import {MatDialog} from '@angular/material';
 import {MovieDb} from '../../services/movies.service';
-import {MovieComponent} from '../movie/movie.component';
+import {MovieComponent} from '../movie-module/movie-module.component';
 
 @Component({
   selector: 'app-movie-list',

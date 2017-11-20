@@ -2,3 +2,34 @@
 body{
   color:#ffffff
 }
+
+#toggleGroup {
+  display: flex;
+  flex-wrap: wrap;
+  color: white;
+}
+.mat-button-toggle-checked{
+  background-color: #5bc0de;
+}
+
+::ng-deep .mat-accent .mat-slider-thumb {
+  background-color: #5bc0de;
+}
+::ng-deep .mat-accent .mat-slider-thumb-label {
+  background-color: #5bc0de;
+}
+::ng-deep .mat-accent .mat-slider-track-fill {
+  background-color: #5bc0de;
+}
+
+mat-button-toggle {
+  color: white
+}
+.search-top-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+mat-slider {
+  margin-left: 1em;
+}

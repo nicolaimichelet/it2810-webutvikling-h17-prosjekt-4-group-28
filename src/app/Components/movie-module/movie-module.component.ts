@@ -5,8 +5,8 @@ import {FlashMessagesService} from "angular2-flash-messages";
 
 @Component({
   selector: 'app-movie',
-  templateUrl: './movie.component.html',
-  styleUrls: ['./movie.component.css']
+  templateUrl: './movie-module.component.html',
+  styleUrls: ['./movie-module.component.css']
 })
 export class MovieComponent implements OnInit{
 

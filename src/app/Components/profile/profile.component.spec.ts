@@ -5,7 +5,7 @@ import {ValidateService} from "../../services/validate.service";
 import { RouterTestingModule } from '@angular/router/testing';
 import {FlashMessagesService} from "angular2-flash-messages";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angular/material";
-import {MovieComponent} from "../movie/movie.component";
+import {MovieComponent} from "../movie-module/movie-module.component";
 import {MovieDb} from "../../services/movies.service";
 import { ProfileComponent } from './profile.component';
 import {HttpClient, HttpClientModule, HttpHandler} from "@angular/common/http";

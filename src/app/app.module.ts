@@ -51,7 +51,7 @@ import { RegisterComponent } from './Components/register/register.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
-import { MovieComponent } from './Components/movie/movie.component';
+import { MovieComponent } from './Components/movie-module/movie-module.component';
 import {AuthGuard} from "./guards/auth.guard";
 import { MovieListComponent } from './Components/movie-list/movie-list.component';
 import { MovieSearchComponent } from './Components/movie-search/movie-search.component';

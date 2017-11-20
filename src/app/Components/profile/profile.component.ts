@@ -4,8 +4,9 @@ import {ValidateService} from "../../services/validate.service";
 import {Router} from '@angular/router';
 import {FlashMessagesService} from "angular2-flash-messages";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
-import {MovieComponent} from "../movie/movie.component";
+import {MovieComponent} from "../movie-module/movie-module.component";
 import {MovieDb} from "../../services/movies.service";
+import {trigger,style,transition,animate,state,keyframes,query,stagger} from "@angular/animations";
 
 @Component({
   selector: 'app-profile',
@@ -24,11 +25,11 @@ export class ProfileComponent implements OnInit {
     private authService: AuthService,
     private validateService: ValidateService,
     private flashMessage: FlashMessagesService,
-    private router: Router) { }
+    private router: Router) {this.update()}
 
   //load profile on initialize
   ngOnInit() {
-    this.update()
+
 
   }
 

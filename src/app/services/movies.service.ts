@@ -9,7 +9,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class MovieDb{
   constructor(private http: HttpClient) {}
-// Returns one movie
+// Returns one movie-module
   specificMovie(id): Promise<MovieData> {
     return this.http.get<MovieData>('/api/Movies/' + id).toPromise().then(data => {
       if(isObject(data)){

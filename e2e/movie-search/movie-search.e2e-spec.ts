@@ -1,7 +1,7 @@
 import {MovieListPage} from './movie-search.po';
 import {browser, by, element, protractor} from 'protractor';
 
-describe('project4 movie-list', () => {
+describe('project4 movie-module-list', () => {
   let page: MovieListPage;
 
   beforeEach(() => {
