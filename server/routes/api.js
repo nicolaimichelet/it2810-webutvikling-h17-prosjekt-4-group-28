@@ -131,67 +131,6 @@ router.get("/Movies/:search_string/:sort/:type/:genre/:rating/:amount", function
 
 });
 
-
-
-//get all movies, and sort based on values given
-//todo: fix limit and skip fordynamic loading
-/*router.get("/Movies", function(req, res) {
-  let query = req.query;
-  /!*  console.log(query.sort);
-    let sort ={};
-    let find= {};
-    if(query.sort){
-      if(query.order){
-        if(query.order === "DESC"){
-          sort[query.sort] = -1
-        }
-        else if(query.order === "ASC"){
-          sort[query.sort] = 1
-        }
-        else{
-          sort[query.sort] = -1
-        }
-      }
-    }//{Title: 1, Rating: 1, Rank: 1}
-    if(query.gt){
-      find["Rating"] ={$gt : query.gt}
-    }
-    console.log(find)*!/
-  const page = req.query.page * 10;
-  let limit2 = 10;
-  if (query.limit){
-    limit2 = parseInt(query.limit);
-  }else{
-    limit2 = parseInt(1000)
-  }
-
-  db.collection(MOVIE_COLLECTION).find({}).limit(limit2).toArray(function(err, docs) {
-    if (err) {
-      handleError(res, err.message, "Failed to get movies.");
-    } else {
-      res.status(200).json(docs);
-    }
-  });
-});*/
-
-
-// Get one genre with ?Genre=XXX
-router.get("/Movies/genre", function(req, res) {
-  let query = req.query
-  let find = ""
-  if (query.Genre){
-    find= {Genre : {$regex : ".*"+query.Genre+".*"}}
-  }
-  console.log(find)
-  db.collection(MOVIE_COLLECTION).find(find).toArray(function(err, docs) {
-    if (err) {
-      handleError(res, err.message, "Failed to get movies.");
-    } else {
-      res.status(200).json(docs);
-    }
-  });
-});
-
 // get specific movie-module by Rank
 router.get("/Movies/:id", function(req, res) {
   console.log(req.params)
