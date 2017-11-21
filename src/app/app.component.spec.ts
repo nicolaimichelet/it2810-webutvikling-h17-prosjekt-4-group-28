@@ -21,6 +21,9 @@ import {HttpModule} from '@angular/http';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ChartComponent}  from './Components/chart/chart.component';
+import {HomeComponent}  from './Components/home/home.component';
+import { ChartsModule } from 'ng2-charts';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -60,7 +63,7 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule,CdkTableModule, FlashMessagesModule, MatIconModule, MatSliderModule,
-        HttpModule, RouterModule, RouterTestingModule, BrowserModule, HttpClientModule, BrowserAnimationsModule],
+        HttpModule, RouterModule, RouterTestingModule, ChartsModule, BrowserModule, HttpClientModule, BrowserAnimationsModule],
       declarations: [
         AppComponent,
         ProfileComponent,
@@ -70,6 +73,8 @@ describe('AppComponent', () => {
         MovieComponent,
         MovieListComponent,
         MovieSearchComponent,
+        ChartComponent,
+        HomeComponent,
       ],
       providers: [MovieDb,ValidateService, AuthService, AuthGuard, RouterModule]
     }).compileComponents();

@@ -32,4 +32,16 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  /*describe('LoginComponent', () => {
+  let component: LoginComponent;
+  component.username = 'rob';
+  component.password = 'pwd'
+
+  it('username should be rob when rob has logged in', () => {
+    component.onLoginSubmit();
+    expect(component.username).toEqual('rob');
+  });
+});*/
+
 });
