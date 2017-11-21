@@ -8,20 +8,29 @@
       movies you favorite. <br> To see more information about a movie, click on it in the list. You can also unfavorite a movie,
       by clicking the favorite button again.
       <br><br> This alert will dismiss once you favorite a movie. Head over to the
-      movie page to start favoriting. <br> Cheers! <br>
+      Movies page to start favoriting. <br> Cheers! <br>
       The AMDB Team
     </div>
           <br><br>
     <div class="favbox">
       <table class="table table-striped table-hover" style="color: white; font-size: 1.5em">
         <tr>
-          <th>Your favorites</th>
+          <th class="diabled"><mat-icon matListIcon class="icon">star</mat-icon>Your favorites</th>
         </tr>
-             <tr *ngFor="let favorite of favorites" (click)="showInfo(favorite)">
+        <br>
+          <div [@stagger]>
+             <tr [@fade] *ngFor="let favorite of favorites" (click)="showInfo(favorite)">
 
-               <td>{{favorite}}</td>
+               <td><mat-icon matListIcon class="icon">movie</mat-icon>{{favorite}}</td>
              </tr>
+          </div>
       </table>
+    </div>
+
+    <div @explainerAnim>
+      <div class="col">
+        <p>Did you remember your popcorn?</p>
+      </div>
     </div>
 
   </div>

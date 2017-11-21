@@ -3,12 +3,21 @@ import {AuthService} from '../../services/auth.service';
 import {ValidateService} from "../../services/validate.service";
 import {Router} from '@angular/router';
 import {FlashMessagesService} from "angular2-flash-messages";
-
+import {trigger, style, transition, animate, state, keyframes, query, stagger, animateChild} from "@angular/animations";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  animations: [
+    trigger('fade', [
+      transition(':enter', [style({opacity: 0}), animate('1.5s ease')])
+    ]),
+    trigger('stagger', [
+      transition(':enter', [
+        query('div', stagger('0.12s', [animateChild()]), { optional: true } )
+      ])
+    ])]
 })
 export class LoginComponent {
 
