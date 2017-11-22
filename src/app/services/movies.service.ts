@@ -39,7 +39,6 @@ export class MovieDb{
       + (data.searchString === '' ? 'undefined' : data.searchString)
       + '/' + data.genreString
       + '/' + data.ratingNumber).toPromise().then(movie =>{
-      console.log(movie);
       if(isObject(movie)){
 
         return movie;

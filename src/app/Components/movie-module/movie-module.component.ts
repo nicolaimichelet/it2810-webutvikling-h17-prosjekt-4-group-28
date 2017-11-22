@@ -21,9 +21,7 @@ export class MovieComponent implements OnInit{
   ngOnInit() {
     if (this.authService.loggedIn()){
       this.showButton = true;
-      console.log(this.authService.user)
       this.authService.getProfile().subscribe(profile => {
-          console.log(profile);
           this.username = profile.user.username;
           this.favorites = profile.user.favorites;
           if (this.favorites.includes(this.data.Title)){
@@ -46,19 +44,15 @@ export class MovieComponent implements OnInit{
 
 
   onFavorite (){
-  console.log(this.username);
-  console.log(this.data.Title);
+
     if (!this.isFavorite){
-      console.log("Nå blir det liv")
       this.authService.setFavorites(this.username, this.data.Title).subscribe(data => {
-        console.log(data);
         if (data.ok) {
           this.isFavorite = true;
         }
       });
     }
     else {
-      console.log("nå skal det slettes")
       this.authService.removeFavorites(this.username, this.data.Title).subscribe(data=> {
         this.isFavorite = false;
       });

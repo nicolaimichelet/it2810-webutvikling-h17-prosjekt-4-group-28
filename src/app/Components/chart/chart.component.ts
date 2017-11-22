@@ -33,16 +33,13 @@ export class ChartComponent implements OnInit {
   public countMovieRatings(): void {
   this.movieDb.getMovieRatings(this).then(movieRatings => {
   this.movieRatings = movieRatings;
-  console.log(movieRatings);
   let clone = JSON.parse(JSON.stringify(this.barChartData));
   const newValues = new Array(10).fill(0);
   for (const key in movieRatings){
     newValues[movieRatings[key]._id-1] = movieRatings[key].count
-    console.log(key)
   }
   clone[0].data = newValues;
     this.barChartData = clone;
-  console.log(newValues);
 });
 }
 
@@ -66,11 +63,9 @@ export class ChartComponent implements OnInit {
 
   // events
   public chartClicked(e:any):void {
-    console.log(e);
   }
 
   public chartHovered(e:any):void {
-    console.log(e);
   }
 
 /*  public randomize():void {

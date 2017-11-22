@@ -70,7 +70,6 @@ export class MovieListComponent implements OnInit {
 
   // Opens movie-module with data
   public openDialog(data) {
-    console.log(data);
     this.movieDb.specificMovie(data.Title).then( data => {
       const dialog = this.dialog.open(MovieComponent, {
         data,
