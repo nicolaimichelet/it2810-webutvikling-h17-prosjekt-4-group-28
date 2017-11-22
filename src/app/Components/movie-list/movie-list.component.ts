@@ -20,6 +20,7 @@ export class MovieListComponent implements OnInit {
   movies: MovieData[];
 
   public limit = 20;
+  private skip = 0;
   bottom = true;
   sort: string = 'none';
   sortType: number = 1;
@@ -29,6 +30,9 @@ export class MovieListComponent implements OnInit {
   dialogResult = '';
   isloading = false
 
+
+  // Called by the matSort titles
+  // changed to value for mongodb
   sortData(event){
     this.sort = event.active;
     if (event.direction === 'asc'){
@@ -42,16 +46,20 @@ export class MovieListComponent implements OnInit {
       );
     this.ngOnChanges(event.active);
   }
+
+  // Fires when there is a change in input from movie-list
   ngOnChanges(changes: any) {
+      this.skip = 0
       this.limit = 30;
+      this.movies = [];
       this.getMovies();
   }
 
-
+  // call for getting movies based on query
   public getMovies(): void {
     this.isloading = true
     this.movieDb.getMovies(this).then(movies => {
-      this.movies = movies;
+      this.movies = this.movies.concat(movies);
       this.bottom = true;
       this.isloading = false;
     });
@@ -60,7 +68,7 @@ export class MovieListComponent implements OnInit {
     this.getMovies();
   }
 
-
+  // Opens movie-module with data
   public openDialog(data) {
     console.log(data);
     this.movieDb.specificMovie(data.Title).then( data => {
@@ -79,7 +87,8 @@ export class MovieListComponent implements OnInit {
     if(this.bottom) {
       if(window.innerHeight + window.scrollY >= document.body.scrollHeight-100) {
         this.bottom = false;
-        this.limit += 10;
+        this.skip = this.limit;
+        this.limit = 10;
         this.getMovies();
       }
     }

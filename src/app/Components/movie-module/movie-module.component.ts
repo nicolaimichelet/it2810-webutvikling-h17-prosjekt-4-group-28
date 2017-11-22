@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {AuthService} from '../../services/auth.service';
-import {FlashMessagesService} from "angular2-flash-messages";
 
 @Component({
   selector: 'app-movie',
@@ -17,12 +16,12 @@ export class MovieComponent implements OnInit{
 
   constructor(public thisDialogRef: MatDialogRef<MovieComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
               private authService: AuthService) {
-    console.log(data)
   }
 
   ngOnInit() {
     if (this.authService.loggedIn()){
       this.showButton = true;
+      console.log(this.authService.user)
       this.authService.getProfile().subscribe(profile => {
           console.log(profile);
           this.username = profile.user.username;

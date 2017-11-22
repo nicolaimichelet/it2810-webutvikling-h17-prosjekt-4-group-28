@@ -17,6 +17,7 @@ export class MovieDb{
       }}).catch(err => console.log('error' + err));
   }
 
+// Returns all movies which correspond to query. /Movies/undefined/none/1/none/0/30/10
 
   getMovies(data): Promise<MovieData[]> {
     return this.http.get<MovieData[]>('api/Movies/'
@@ -25,13 +26,14 @@ export class MovieDb{
       + '/' + data.sortType
       + '/' + data.genreString
       + '/' + data.ratingNumber
-      + '/' + data.limit).toPromise().then(movie =>{
-        if(isObject(movie)){
+      + '/' + (data.limit)
+      + '/' + data.skip).toPromise().then(movie =>{
+        if (isObject(movie)) {
           return movie;
         }
     }).catch(err => console.log('error' + err));
   }
-
+  // returns number of movies sorted by rating
   getMovieRatings(data): Promise<any []> {
     return this.http.get<MovieData[]>('api/count/'
       + (data.searchString === '' ? 'undefined' : data.searchString)
@@ -53,7 +55,8 @@ export interface MovieData {
   Director?: string;
   Genre?: string;
   Year?: number;
-  Title?: string;
+  Title: string;
   Rank: number;
   Rating: number;
+  Runtime?: number;
 }
