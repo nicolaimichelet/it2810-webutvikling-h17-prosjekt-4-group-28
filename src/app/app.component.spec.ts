@@ -36,6 +36,7 @@ import {
   MatExpansionModule,
   MatGridListModule,
   MatIconModule,
+  MatExpansionPanel,
   MatInputModule,
   MatListModule,
   MatMenuModule,
@@ -63,7 +64,7 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule,CdkTableModule, FlashMessagesModule, MatIconModule, MatSliderModule,
-        HttpModule, RouterModule, RouterTestingModule, ChartsModule, BrowserModule, HttpClientModule, BrowserAnimationsModule],
+        HttpModule, RouterModule, MatExpansionModule, RouterTestingModule, ChartsModule, BrowserModule, HttpClientModule, BrowserAnimationsModule],
       declarations: [
         AppComponent,
         ProfileComponent,

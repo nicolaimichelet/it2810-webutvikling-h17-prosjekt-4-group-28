@@ -40,7 +40,7 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatStepperModule,
+  MatStepperModule, MatExpansionPanel,
 
 } from '@angular/material';
 import {CdkTableModule} from '@angular/cdk/table';
