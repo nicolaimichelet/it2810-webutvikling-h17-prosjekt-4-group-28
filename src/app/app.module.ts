@@ -66,7 +66,8 @@ const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'movies', component: MovieSearchComponent},
-  {path: 'login', component: LoginComponent,}
+  {path: 'login', component: LoginComponent},
+  {path: '**', redirectTo: 'home'}
 ];
 
 @NgModule({
