@@ -9,6 +9,7 @@ import {FlashMessagesService} from "angular2-flash-messages";
 import {RouterTestingModule} from "@angular/router/testing";
 import {HttpModule} from "@angular/http";
 import {HttpClientModule} from "@angular/common/http";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -16,7 +17,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, RouterTestingModule, HttpModule, HttpClientModule],
+      imports: [FormsModule, RouterTestingModule, HttpModule, HttpClientModule, BrowserAnimationsModule],
       declarations: [ LoginComponent ],
       providers: [AuthService, ValidateService, FlashMessagesService, HttpModule, HttpClientModule]
     })
