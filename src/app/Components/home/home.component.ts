@@ -15,7 +15,9 @@ import {trigger,style,transition,animate,state,keyframes,query,stagger} from "@a
           animate('1s ease-in')
         ]),
 
-        transition('* => void', [
+       transition(':enter', [style({opacity: 0}), animate('3s ease')]),
+
+        transition(':enter', [
           animate('1s ease-in', style({transform: 'translateY(100%)'}))
         ])
 

@@ -14,6 +14,7 @@
   </mat-slider>
 </div>
 <br>
+  <h2 style="  color: white;font-size: 1.2em; padding-top: 2%">Graph:</h2>
   <app-chart [searchString]="searchInput" [genreString]="genreString" [ratingNumber]="ratingNumber"></app-chart>
   <h2 style="  color: white;font-size: 1.2em; padding-top: 2%">Genre:</h2>
 <mat-button-toggle-group id="toggleGroup" name="gruppe" (change)="genreString = $event.value" >
