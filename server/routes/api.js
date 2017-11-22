@@ -8,7 +8,7 @@ const User = require('../../models/user');
 const MOVIE_COLLECTION = "Movies";
 const USERS_COLLECTION = "users";
 const db = server.db;
-
+const exclude = {Description: 0, Actors: 0, Director : 0, Rank : 0, 'Revenue (Millions)': 0, Votes: 0, 'Runtime (Minutes)' : 0, Metascore : 0};
 //Our api for interacting with mongodb
 
 //Register user - inserting user into db
@@ -100,8 +100,9 @@ router.delete('/favoriteDelete', (req,res) => {
 });
 
 
-
-router.get("/Movies/:search_string/:sort/:type/:genre/:rating/:amount", function (req, res) {
+// Returns list of movies based on search query
+// Example: /Movies/undefined/none/1/none/0/30/10
+router.get("/Movies/:search_string/:sort/:type/:genre/:rating/:amount/:skip", function (req, res) {
   let query = {}
   if (req.params.search_string !== 'undefined'){
     query = {
@@ -123,8 +124,8 @@ router.get("/Movies/:search_string/:sort/:type/:genre/:rating/:amount", function
     }
   }
 
-  db.collection(MOVIE_COLLECTION).find(query).sort(req.params.sort === 'none' ? {} : {[req.params.sort]: parseInt(req.params.type)})
-    .limit(parseInt(req.params.amount)).toArray((err, docs) => {
+  db.collection(MOVIE_COLLECTION).find(query, exclude).sort(req.params.sort === 'none' ? {} : {[req.params.sort]: parseInt(req.params.type)})
+    .limit(parseInt(req.params.amount)).skip(parseInt(req.params.skip)).toArray((err, docs) => {
     if (err) console.log(res, err, 500);
     res.status(200).json(docs);
   });
@@ -165,7 +166,6 @@ router.get("/count/:search_string/:genre/:rating", function (req, res) {
       $gte: parseFloat(req.params.rating)
     }
   }
-
   const count = [
     { "$match":
       query

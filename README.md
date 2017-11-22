@@ -1,5 +1,55 @@
 # Project4
 
+## Krav
+
+* Webapplikasjonen skal kjøres på gruppas virtuelle maskin og bruke node.js på serversiden, og skal være utviklet i Angular (bruk v2 eller v4, https://angular.io ). Det er selvsagt greit å i tillegg bruke andre bibliotek eller løsninger som dere finner hensiktsmessig.
+  * Vi har brukt Angular v4, i tillegg til andre bibloteker.
+
+* I webappliksjonen skal det inngå en backend database som kjøres på gruppas virtuelle maskin. Type database og hvordan denne brukes er opp til dere å bestemme, men grensesnittet til databasen skal være godt designet ihht. god praksis (bruk av REST ea).  
+
+  * Vi bruker mongodb som database. Vi har en database på 1000 filmer fra 2006 til 2016, fra https://www.kaggle.com/PromptCloudHQ/imdb-data.
+ Vi har prøvd å følge gode praksiser ved REST. brukerinfo blir også lagret i Mongodb, og passord er hashet.
+* Dere skal demonstrere både skriving og lesing til databasen fra webapplikasjonen inklusive en form for søk (i praksis dynamisk brukerdefinert utvalg av det som skal vises). Generelt er det mye artigere å jobbe med en datamengde som gir et realistisk inntrykk (eksempevis mulig å søke på forskjellige ting og få resultatsett som er forskjellige og har forskjellig antall). Bruk data dere finner på web, eller lag egne data.
+  * Vi har tatt i bruk lesing fra database når vi for eksempel henter ut filmer, og filtrere på ulike parameter.
+  Vi skriver når vi registreren en bruker og når vi for eksempel setter en favorittfilm.
+* Brukergrensensittet skal ha listebasert visning med få detaljer for hver enhet, og hvor målet er å vise brukeren hva som er i databasen eller hva som er resultatet av et søk. Brukeren skal ha mulighet til å se flere detaljer for hver enhet enten i et eget vindu, eller ved at listen enheten i lista har expand/collpase egenskap.
+
+  * Vi har en liste som viser tittel, sjanger, utgivelsesår og IMDB rating. Ved å klikke på en film vil det det komme opp en popup med mer info.
+
+* Den listebaserte visningen skal kunne sorteres på minimum to forskjellge egenskaper. Eksempel: etter at brukeren har fått returnert en liste etter et søk skal brukeren kunne bytte mellom forskjellige sorteringer.
+
+  * Det er mulig å sortere tittel, sjanger, utgivelsesår og IMDB rating.
+
+* Den listebaserte visningen skal kunne filtreres på minimum to forskjellge egenskaper. Eksempel: etter at brukeren har fått returnert en liste etter et søk skal brukeren kunne krysse av på en egenskap for å få begrenset antallet enheter i resultatsettet til kun de som har denne egenskapen. 
+
+  * Det er mulig å filtrere på minimum IMDB rating, og sjanger.
+
+* Den listebaserte visningen skal ha dynamisk lasting av data. Eksempel: etter et søk vises de 10 første treffene, men flere lastes når brukeren scroller eller ved blaing i sider. 
+
+  * Det er implementert dynamisk lasting av type infinite scroll. Ved å skrolle ned vil det hentes flere filmer fra database. Vi henter de 10 neste filmene ved hvert kall.
+
+* Webapplikasjonen skal ha "min side" funksjonalitet som i praksis betyr at en bruker skal kunne logge seg på og at det blir registrert noe fra brukerens søkeaktiviteten f.eks. hva brukeren har sett på tidligere eller søkene som brukeren har brukt. 
+
+  * Vi har implementert registrering og login. Vi har tolket kravet om historikk ved at på profilsiden kan man se filmer man har likt.
+
+* Webapplisjonen må implementere "session"-håndtering (som du f.eks. trenger for å implementere dynamisk lasting, min side, og filtrering/sortering som skal fungere med sidevisning).
+  * Vi har implementert session-håndtering ved local Storage, en annen mulighet er å bruke cookies. Her blir brukeren lagret, sammen med JSON Web Token. Session utgår etter 1 uke. Routingen til min side er beskyttet, og det er ikke mulig å like en film uten å være logget inn.
+
+* Webapplikasjonen skal ha et litt "fancy" alternativ visning av listen f.eks. visning på kart eller visuell grafisk fremstilling av data, ordsky ea.
+
+  * Vi har implementert en graf som viser fordelingen av filmer basert på rating, denne er dynamisk basert på filter og søkeord.
+
+* Kode skal være testet og funksjonaliteten skal være godt utprøvd og feilfri. 
+
+
+
+* Prosjektet skal være godt dokumentert, slik at det er lett å sette seg inn i for andre.
+
+
+
+## Testing
+Tests are located in each spec.ts file.
+
 ## Description
 Welcome to our project! 
 

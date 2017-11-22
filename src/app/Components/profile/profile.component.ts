@@ -79,7 +79,6 @@ export class ProfileComponent implements OnInit {
         else {
           this.showProfileInfo = true;
         }
-        console.log(this.favorites);
       },
       err => {
         console.log(err);

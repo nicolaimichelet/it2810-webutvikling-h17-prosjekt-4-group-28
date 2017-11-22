@@ -8,11 +8,14 @@ import {MovieData} from "../../services/movies.service";
 import {HttpModule, Http} from "@angular/http";
 import {By} from "@angular/platform-browser";
 
+
 describe('MovieComponent', () => {
   let component: MovieComponent;
   let service: AuthService;
   let spy: any;
   let fixture: ComponentFixture<MovieComponent>;
+  let authService: AuthService;
+
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
@@ -55,10 +58,16 @@ describe('MovieComponent', () => {
 
   beforeEach(() => {
     fixture.detectChanges();
+
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should get Title', () => {
+    expect(component.data.Title).toBe('test modal');
+  });
+  it('should set user', () => {
+    component.ngOnInit();
+    tick();
+    expect(component.data.username).toEqual('per');
   });
 
 
