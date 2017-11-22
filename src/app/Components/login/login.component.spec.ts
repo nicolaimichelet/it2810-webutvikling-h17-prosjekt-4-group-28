@@ -21,7 +21,7 @@ describe('LoginComponent', () => {
       providers: [AuthService, ValidateService, FlashMessagesService, HttpModule, HttpClientModule]
     })
     .compileComponents();
-  }));
+    }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);
@@ -33,15 +33,12 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  /*describe('LoginComponent', () => {
-  let component: LoginComponent;
-  component.username = 'rob';
-  component.password = 'pwd'
-
-  it('username should be rob when rob has logged in', () => {
-    component.onLoginSubmit();
-    expect(component.username).toEqual('rob');
+  it('Robby is logged in', () => {
+    const fixture = TestBed.createComponent(LoginComponent);
+    const app = fixture.debugElement.componentInstance;
+    app.username = 'robby';
+    app.password = 'pwd';
+    app.onLoginSubmit();
+    expect(app.username).toEqual('robby');
   });
-});*/
-
 });

@@ -29,22 +29,24 @@ describe('RegisterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
   it(`should have as title 'REGISTER'`, async(() => {
     const fixture = TestBed.createComponent(RegisterComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('REGISTER');
   }));
 
-  it(`should set the NAME and USERNAME`, async(() => {
+  it(`should REGISTER the NAME and USERNAME`, async(() => {
     const fixture = TestBed.createComponent(RegisterComponent);
     const app = fixture.debugElement.componentInstance;
     app.name = 'robby';
     app.username = 'bobby';
-    app.password = 'robby'
-    app.onRegisterSubmit()
+    app.password = 'robby';
+    app.onRegisterSubmit();
     expect(app.name).toEqual('robby');
     expect(app.username).toEqual('bobby');
   }));
+
   it(`should alert something wrong.'`, async(() => {
     const fixture = TestBed.createComponent(RegisterComponent);
     const app = fixture.debugElement.componentInstance;
