@@ -40,7 +40,7 @@
   * Vi har implementert en graf som viser fordelingen av filmer basert på rating, denne er dynamisk basert på filter og søkeord.
 
 * Kode skal være testet og funksjonaliteten skal være godt utprøvd og feilfri. 
-
+  * Det har blitt skrevet unit tester til komponentene, og e2e tester. De er i e2e mappen. Vi har også nå mocket data (filmer), slik som ble foreslått av andre på test tilbakemeldingene. 
 
 
 * Prosjektet skal være godt dokumentert, slik at det er lett å sette seg inn i for andre.
